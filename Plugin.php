@@ -18,7 +18,7 @@ class Plugin extends PluginBase
     {
         return [
             'name'        => 'PhotoAlbums',
-            'description' => 'No description provided yet...',
+            'description' => 'Create, display and manage galleries of photos arranged in albums',
             'author'      => 'Graker',
             'icon'        => 'icon-leaf'
         ];
