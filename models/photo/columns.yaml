@@ -7,6 +7,12 @@ columns:
         label: Title
         searchable: true
 
+    album:
+        label: Album
+        valueFrom: title
+        searchable: true
+        relation: album
+
     created_at:
         label: Created
         type: date
