@@ -1,4 +1,4 @@
-<?php namespace Graker\Photoalbums\Models;
+<?php namespace Graker\PhotoAlbums\Models;
 
 use Model;
 
@@ -8,32 +8,27 @@ use Model;
 class Album extends Model
 {
 
-    /**
-     * @var string The database table used by the model.
-     */
-    public $table = 'graker_photoalbums_albums';
+  /**
+   * @var string The database table used by the model.
+   */
+  public $table = 'graker_photoalbums_albums';
 
-    /**
-     * @var array Guarded fields
-     */
-    protected $guarded = ['*'];
+  /**
+   * @var array of validation rules
+   */
+  public $rules = [
+    'title' => 'required',
+    'slug' => ['required', 'regex:/^[a-z0-9\/\:_\-\*\[\]\+\?\|]*$/i', 'unique:graker_photoalbums_albums'],
+  ];
 
-    /**
-     * @var array Fillable fields
-     */
-    protected $fillable = [];
-
-    /**
-     * @var array Relations
-     */
-    public $hasOne = [];
-    public $hasMany = [];
-    public $belongsTo = [];
-    public $belongsToMany = [];
-    public $morphTo = [];
-    public $morphOne = [];
-    public $morphMany = [];
-    public $attachOne = [];
-    public $attachMany = [];
+  /**
+   * @var array Relations
+   */
+  public $hasMany = [
+    'photos' => 'Graker\PhotoAlbums\Models\Photo'
+  ];
+  public $belongsTo = [
+    'user' => ['Backend\Models\User'],
+  ];
 
 }

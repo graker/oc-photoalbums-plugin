@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Album
+
+# Model Form Field configuration
+form: $/graker/photoalbums/models/album/fields.yaml
+
+# Model Class name
+modelClass: Graker\Photoalbums\Models\Album
+
+# Default redirect location
+defaultRedirect: graker/photoalbums/albums
+
+# Create page
+create:
+    title: Create Album
+    redirect: graker/photoalbums/albums/update/:id
+    redirectClose: graker/photoalbums/albums
+
+# Update page
+update:
+    title: Edit Album
+    redirect: graker/photoalbums/albums
+    redirectClose: graker/photoalbums/albums
+
+# Preview page
+preview:
+    title: Preview Album

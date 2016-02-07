@@ -1,4 +1,4 @@
-<?php namespace Graker\Photoalbums\Components;
+<?php namespace Graker\PhotoAlbums\Components;
 
 use Cms\Classes\ComponentBase;
 

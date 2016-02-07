@@ -1,4 +1,4 @@
-<?php namespace Graker\Photoalbums\Updates;
+<?php namespace Graker\PhotoAlbums\Updates;
 
 use Schema;
 use October\Rain\Database\Updates\Migration;
@@ -6,19 +6,23 @@ use October\Rain\Database\Updates\Migration;
 class CreateAlbumsTable extends Migration
 {
 
-    public function up()
+  public function up()
+  {
+    Schema::create('graker_photoalbums_albums', function($table)
     {
-        Schema::create('graker_photoalbums_albums', function($table)
-        {
-            $table->engine = 'InnoDB';
-            $table->increments('id');
-            $table->timestamps();
-        });
-    }
+      $table->engine = 'InnoDB';
+      $table->increments('id');
+      $table->integer('user_id')->unsigned()->nullable()->index();
+      $table->string('title')->nullable();
+      $table->string('slug')->index();
+      $table->text('description')->nullable();
+      $table->timestamps();
+    });
+  }
 
-    public function down()
-    {
-        Schema::dropIfExists('graker_photoalbums_albums');
-    }
+  public function down()
+  {
+    Schema::dropIfExists('graker_photoalbums_albums');
+  }
 
 }

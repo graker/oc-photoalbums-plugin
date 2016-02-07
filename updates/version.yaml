@@ -1,1 +1,5 @@
 1.0.1: First version of PhotoAlbums
+1.0.2:
+    - Update with migrations to create albums and photos table
+    - create_albums_table.php
+    - create_photos_table.php
