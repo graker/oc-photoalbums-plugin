@@ -13,6 +13,7 @@ class CreatePhotosTable extends Migration
           $table->engine = 'InnoDB';
           $table->increments('id');
           $table->integer('user_id')->unsigned()->nullable()->index();
+          $table->integer('album_id')->unsigned()->nullable()->index();
           $table->string('title')->nullable();
           $table->text('description')->nullable();
           $table->timestamps();

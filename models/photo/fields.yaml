@@ -3,6 +3,26 @@
 # ===================================
 
 fields:
-    id:
-        label: ID
-        disabled: true
+
+    title:
+        label: Title
+        span: left
+        placeholder: Photo title
+
+    image:
+        label: Photo
+        type: fileupload
+        mode: image
+        imageWidth: 320
+        imageHeight: 240
+
+    album:
+        label: Album
+        type: relation
+        nameFrom: title
+        emptyOption: Not selected
+
+    description:
+        label: Description
+        type: richeditor
+        size: large

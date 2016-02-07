@@ -82,6 +82,18 @@ class Plugin extends PluginBase
             'url'         => Backend::url('graker/photoalbums/albums'),
             'permissions' => ['graker.photoalbums.manage_albums'],
           ],
+          'new_photo' => [
+            'label'       => 'New photo',
+            'icon'        => 'icon-plus-square-o',
+            'url'         => Backend::url('graker/photoalbums/photos/create'),
+            'permissions' => ['graker.photoalbums.manage_albums'],
+          ],
+          'photos' => [
+            'label'       => 'Photos',
+            'icon'        => 'icon-picture-o',
+            'url'         => Backend::url('graker/photoalbums/photos'),
+            'permissions' => ['graker.photoalbums.manage_albums'],
+          ],
         ],
       ],
     ];

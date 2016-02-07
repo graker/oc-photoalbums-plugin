@@ -3,6 +3,21 @@
 # ===================================
 
 fields:
-    id:
-        label: ID
-        disabled: true
+
+    title:
+        label: Title
+        span: left
+        placeholder: Album title
+
+    slug:
+        label: Slug
+        span: right
+        placeholder: album-title
+        preset:
+            field: title
+            type: slug
+
+    description:
+        label: Description
+        type: richeditor
+        size: large
