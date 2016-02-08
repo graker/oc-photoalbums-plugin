@@ -42,4 +42,23 @@ class Album extends Model
     return $this->hasOne('Graker\PhotoAlbums\Models\Photo')->latest();
   }
 
+
+  /**
+   *
+   * Sets and returns url for this model using provided page name and controller
+   * For now we expose just id and slug for URL parameters
+   *
+   * @param string $pageName
+   * @param CMS\Classes\Controller $controller
+   * @return string
+   */
+  public function setUrl($pageName, $controller) {
+    $params = [
+      'id' => $this->id,
+      'slug' => $this->slug,
+    ];
+
+    return $this->url = $controller->pageUrl($pageName, $params);
+  }
+
 }

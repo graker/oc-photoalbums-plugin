@@ -1,18 +1,23 @@
-<ul class="albums-list">
+<div class="albums-list row">
     {% for album in __SELF__.albums() %}
-    <li>
-        <h3><a href="{{ 'default' }}">{{ album.title }}</a></h3>
-        <p class="gallery-preview">
-            <img
-                    data-src="{{ album.latestPhoto.image.filename }}"
-                    src="{{ album.latestPhoto.image.path }}"
-                    style="max-width: 100%" />
-        </p>
-        <p class="info">
-            Created on {{ album.created_at|date('M d, Y') }}
-        </p>
-    </li>
+        <div class="album-preview col-xs-12 col-sm-6 col-md-4 col-lg-3">
+            <h3><a href="{{ album.url }}">{{ album.title }}</a></h3>
+            <p class="gallery-preview">
+                <a href="{{ album.url }}">
+                    <img
+                        data-src="{{ album.latestPhoto.image.filename }}"
+                        src="{{ album.latestPhoto.image.path }}"
+                        style="max-width: 100%" />
+                </a>
+            </p>
+            <p class="info">
+                Created on {{ album.created_at|date('M d, Y') }}
+            </p>
+            <p class="info">
+                {{ album.photo_count }} images
+            </p>
+        </div>
     {% else %}
-    <li class="no-data">You have not created any albums yet</li>
+        <div class="col-xs-12 no-data">You have not created any albums yet</div>
     {% endfor %}
-</ul>
+</div>
