@@ -31,4 +31,15 @@ class Album extends Model
     'user' => ['Backend\Models\User'],
   ];
 
+
+  /**
+   *
+   * This relation allows us to eager-load 1 latest photo per album
+   *
+   * @return mixed
+   */
+  public function latestPhoto() {
+    return $this->hasOne('Graker\PhotoAlbums\Models\Photo')->latest();
+  }
+
 }

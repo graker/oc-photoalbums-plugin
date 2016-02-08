@@ -1,0 +1,18 @@
+<ul class="albums-list">
+    {% for album in __SELF__.albums() %}
+    <li>
+        <h3><a href="{{ 'default' }}">{{ album.title }}</a></h3>
+        <p class="gallery-preview">
+            <img
+                    data-src="{{ album.latestPhoto.image.filename }}"
+                    src="{{ album.latestPhoto.image.path }}"
+                    style="max-width: 100%" />
+        </p>
+        <p class="info">
+            Created on {{ album.created_at|date('M d, Y') }}
+        </p>
+    </li>
+    {% else %}
+    <li class="no-data">You have not created any albums yet</li>
+    {% endfor %}
+</ul>
