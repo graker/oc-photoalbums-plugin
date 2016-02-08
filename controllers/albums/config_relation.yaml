@@ -1,0 +1,12 @@
+# ===================================
+#  Relation Behavior Config
+# ===================================
+
+photos:
+    label: Photo
+    manage:
+        form: $/graker/photoalbums/models/photo/fields.yaml
+        list: $/graker/photoalbums/models/photo/columns.yaml
+    view:
+        list: $/graker/photoalbums/models/photo/columns.yaml
+        toolbarButtons: create|delete

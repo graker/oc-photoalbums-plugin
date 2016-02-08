@@ -17,7 +17,13 @@ fields:
             field: title
             type: slug
 
+#    photos_widget:
+#            label: Photos
+#            type: gallerywidget
+
+
     description:
         label: Description
         type: richeditor
         size: large
+
