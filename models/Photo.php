@@ -31,4 +31,23 @@ class Photo extends Model
     'image' => ['System\Models\File'],
   ];
 
+
+  /**
+   *
+   * Sets and returns url for this model using provided page name and controller
+   * For now we expose photo id and album's slug
+   *
+   * @param string $pageName
+   * @param CMS\Classes\Controller $controller
+   * @return string
+   */
+  public function setUrl($pageName, $controller) {
+    $params = [
+      'id' => $this->id,
+      'album_slug' => $this->album->slug,
+    ];
+
+    return $this->url = $controller->pageUrl($pageName, $params);
+  }
+
 }

@@ -5,4 +5,10 @@ Each photo can have a title, an url and can be displayed in an album or as a sin
 
 Default partials markup is created in assumption that you have Bootstrap CSS in place, feel free to override.
 
-DEVELOPMENT IS ONGOING, NOT NEARLY READY FOR PRODUCTION SITES
+At the moment, only basic functionality is ready. You can:
+ - create and edit photo albums
+ - add photos to albums
+ - add descriptions to albums and photos
+ - use 3 components: albums list, album (to output album photos) and photo (to output single photo)
+
+DEVELOPMENT IS ONGOING, NOT READY FOR PRODUCTION SITES

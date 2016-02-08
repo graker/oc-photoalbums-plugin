@@ -43,8 +43,7 @@ class AlbumList extends ComponentBase
    *
    * @return mixed
    */
-  public function getAlbumPageOptions()
-  {
+  public function getAlbumPageOptions() {
     return Page::sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
   }
 
@@ -82,6 +81,7 @@ class AlbumList extends ComponentBase
     foreach ($albums as $album) {
       $album->photo_count = $album->photos()->count();
       $album->url = $album->setUrl($this->property('albumPage'), $this->controller);
+      $album->latestPhoto->thumb = $album->latestPhoto->image->getThumb(640, 480, ['mode' => 'auto']);
     }
 
     return $albums;

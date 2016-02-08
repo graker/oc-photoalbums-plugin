@@ -1,3 +1,24 @@
-<p>This is the default markup for component Album</p>
+{% set album = __SELF__.album %}
 
-<small>You can delete this file if you want</small>
+<h1>{{ album.title }}</h1>
+
+<div class="album-description row">
+    <div class="col-xs-12">
+        {{ album.description|raw }}
+    </div>
+</div>
+
+<div class="album-photos row">
+    {% for photo in album.photos %}
+        <div class="photo col-xs-12 col-sm-6 col-md-4 col-lg-3">
+            <a href="{{ photo.url }}"><img
+                    data-src="{{ photo.thumb }}"
+                    src="{{ photo.thumb }}"
+                    style="max-width: 100%" />
+            </a>
+            <a href="{{ photo.url }}"><strong>{{ photo.title }}</strong></a>
+        </div>
+    {% else %}
+        <div class="col-xs-12 no-data">Album doesn't have any photos yet</div>
+    {% endfor %}
+</div>

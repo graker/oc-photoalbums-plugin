@@ -1,3 +1,18 @@
-<p>This is the default markup for component Photo</p>
+{% set photo = __SELF__.photo %}
 
-<small>You can delete this file if you want</small>
+{% if photo.title %}
+    <h1>{{ photo.title }}</h1>
+{% endif %}
+<div class="photo-image row">
+    <div class="col-xs-12">
+        <img
+                data-src="{{ photo.image.filename }}"
+                src="{{ photo.image.path }}"
+                style="max-width: 100%" />
+    </div>
+</div>
+<div class="photo-description row">
+    <div class="col-xs-12">
+        {{ photo.description | raw }}
+    </div>
+</div>
