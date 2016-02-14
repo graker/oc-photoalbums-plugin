@@ -20,7 +20,7 @@ class AlbumList extends ComponentBase
 
   /**
    *
-   * Don't have properties yet
+   * Define properties
    *
    * @return array of component properties
    */
