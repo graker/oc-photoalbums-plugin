@@ -60,6 +60,7 @@ class AlbumList extends ComponentBase
       ->with(['latestPhoto' => function ($query) {
         $query->with('image');
       }])
+      ->with('photosCount')
       ->get();
 
     return $this->prepareAlbums($albums);
@@ -79,7 +80,7 @@ class AlbumList extends ComponentBase
 
     //set up photo count and url
     foreach ($albums as $album) {
-      $album->photo_count = $album->photos()->count();
+      $album->photo_count = $album->photosCount;
       $album->url = $album->setUrl($this->property('albumPage'), $this->controller);
       $album->latestPhoto->thumb = $album->latestPhoto->image->getThumb(640, 480, ['mode' => 'auto']);
     }

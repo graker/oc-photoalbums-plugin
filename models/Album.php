@@ -45,6 +45,36 @@ class Album extends Model
 
   /**
    *
+   * This relation allows us to count photos
+   *
+   * @return mixed
+   */
+  public function photosCount() {
+    return $this->hasOne('Graker\PhotoAlbums\Models\Photo')
+      ->selectRaw('album_id, count(*) as aggregate')
+      ->groupBy('album_id');
+  }
+
+
+  /**
+   *
+   * Getter for photos count
+   *
+   * @return int
+   */
+  public function getPhotosCountAttribute() {
+    // if relation is not loaded already, let's do it first
+    if (!array_key_exists('photosCount', $this->relations)) {
+      $this->load('photosCount');
+    }
+    $related = $this->getRelation('photosCount');
+
+    return ($related) ? (int) $related->aggregate : 0;
+  }
+
+
+  /**
+   *
    * Sets and returns url for this model using provided page name and controller
    * For now we expose just id and slug for URL parameters
    *
