@@ -33,6 +33,12 @@ class AlbumList extends ComponentBase
         'type'        => 'dropdown',
         'default'     => 'photoalbums/album',
       ],
+      'thumbMode' => [
+        'title'       => 'Thumb mode',
+        'description' => 'Mode of thumb generation',
+        'type'        => 'dropdown',
+        'default'     => 'auto',
+      ],
     ];
   }
 
@@ -45,6 +51,23 @@ class AlbumList extends ComponentBase
    */
   public function getAlbumPageOptions() {
     return Page::sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
+  }
+
+
+  /**
+   *
+   * Returns thumb resize mode options for thumb mode select box setting
+   *
+   * @return array
+   */
+  public function getThumbModeOptions() {
+    return [
+      'auto' => 'Auto',
+      'exact' => 'Exact',
+      'portrait' => 'Portrait',
+      'landscape' => 'Landscape',
+      'crop' => 'Crop',
+    ];
   }
 
 
@@ -82,7 +105,7 @@ class AlbumList extends ComponentBase
     foreach ($albums as $album) {
       $album->photo_count = $album->photosCount;
       $album->url = $album->setUrl($this->property('albumPage'), $this->controller);
-      $album->latestPhoto->thumb = $album->latestPhoto->image->getThumb(640, 480, ['mode' => 'auto']);
+      $album->latestPhoto->thumb = $album->latestPhoto->image->getThumb(640, 480, ['mode' => $this->property('thumbMode')]);
     }
 
     return $albums;
