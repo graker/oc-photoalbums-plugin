@@ -2,20 +2,14 @@
     {% for album in __SELF__.albums() %}
         <div class="album-preview col-xs-12 col-sm-6 col-md-4 col-lg-3">
             <h3><a href="{{ album.url }}">{{ album.title }}</a></h3>
-            <p class="gallery-preview">
-                <a href="{{ album.url }}">
-                    <img
-                        data-src="{{ album.latestPhoto.thumb }}"
-                        src="{{ album.latestPhoto.thumb }}"
-                        style="max-width: 100%" />
-                </a>
-            </p>
-            <p class="info">
-                Created on {{ album.created_at|date('M d, Y') }}
-            </p>
-            <p class="info">
-                {{ album.photo_count }} images
-            </p>
+            <a href="{{ album.url }}">
+                <img
+                    data-src="{{ album.latestPhoto.thumb }}"
+                    src="{{ album.latestPhoto.thumb }}"
+                    style="max-width: 100%" />
+            </a>
+            Created on {{ album.created_at|date('M d, Y') }}
+            {{ album.photo_count }} images
         </div>
     {% else %}
         <div class="col-xs-12 no-data">You have not created any albums yet</div>
