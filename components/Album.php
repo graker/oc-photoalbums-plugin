@@ -38,6 +38,12 @@ class Album extends ComponentBase
         'type'        => 'dropdown',
         'default'     => 'photoalbums/album/photo',
       ],
+      'thumbMode' => [
+        'title'       => 'Thumb mode',
+        'description' => 'Mode of thumb generation',
+        'type'        => 'dropdown',
+        'default'     => 'auto',
+      ],
     ];
   }
 
@@ -49,6 +55,23 @@ class Album extends ComponentBase
    */
   public function getPhotoPageOptions() {
     return Page::sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
+  }
+
+
+  /**
+   *
+   * Returns thumb resize mode options for thumb mode select box setting
+   *
+   * @return array
+   */
+  public function getThumbModeOptions() {
+    return [
+      'auto' => 'Auto',
+      'exact' => 'Exact',
+      'portrait' => 'Portrait',
+      'landscape' => 'Landscape',
+      'crop' => 'Crop',
+    ];
   }
 
   //TODO introduce photos pagination
@@ -79,7 +102,7 @@ class Album extends ComponentBase
     //prepare photo urls and thumbs
     foreach ($album->photos as $photo) {
       $photo->url = $photo->setUrl($this->property('photoPage'), $this->controller);
-      $photo->thumb = $photo->image->getThumb(640, 480, ['mode' => 'auto']);
+      $photo->thumb = $photo->image->getThumb(640, 480, ['mode' => $this->property('thumbMode')]);
     }
 
     return $album;
