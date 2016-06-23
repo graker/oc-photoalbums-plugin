@@ -11,8 +11,10 @@
                 style="max-width: 100%" />
     </div>
 </div>
-<div class="photo-description row">
-    <div class="col-xs-12">
-        {{ photo.description | raw }}
+{% if photo.description %}
+    <div class="photo-description row">
+        <div class="col-xs-12">
+            {{ photo.description | raw }}
+        </div>
     </div>
-</div>
+{% endif %}
