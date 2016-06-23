@@ -91,17 +91,19 @@ class Photo extends ComponentBase
       ->with('album')
       ->first();
 
-    // set url so we can have back link to the parent album
-    $photo->album->url = $photo->album->setUrl($this->property('albumPage'), $this->controller);
+    if ($photo) {
+      // set url so we can have back link to the parent album
+      $photo->album->url = $photo->album->setUrl($this->property('albumPage'), $this->controller);
 
-    //set next and previous photos
-    $photo->next = $photo->nextPhoto();
-    if ($photo->next) {
-      $photo->next->url = $photo->next->setUrl($this->property('photoPage'), $this->controller);
-    }
-    $photo->previous = $photo->previousPhoto();
-    if ($photo->previous) {
-      $photo->previous->url = $photo->previous->setUrl($this->property('photoPage'), $this->controller);
+      //set next and previous photos
+      $photo->next = $photo->nextPhoto();
+      if ($photo->next) {
+        $photo->next->url = $photo->next->setUrl($this->property('photoPage'), $this->controller);
+      }
+      $photo->previous = $photo->previousPhoto();
+      if ($photo->previous) {
+        $photo->previous->url = $photo->previous->setUrl($this->property('photoPage'), $this->controller);
+      }
     }
 
     return $photo;

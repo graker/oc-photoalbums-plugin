@@ -99,10 +99,12 @@ class Album extends ComponentBase
       }])
       ->first();
 
-    //prepare photo urls and thumbs
-    foreach ($album->photos as $photo) {
-      $photo->url = $photo->setUrl($this->property('photoPage'), $this->controller);
-      $photo->thumb = $photo->image->getThumb(640, 480, ['mode' => $this->property('thumbMode')]);
+    if ($album) {
+      //prepare photo urls and thumbs
+      foreach ($album->photos as $photo) {
+        $photo->url = $photo->setUrl($this->property('photoPage'), $this->controller);
+        $photo->thumb = $photo->image->getThumb(640, 480, ['mode' => $this->property('thumbMode')]);
+      }
     }
 
     return $album;

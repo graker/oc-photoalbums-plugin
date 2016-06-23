@@ -25,7 +25,7 @@ class Album extends Model
    * @var array Relations
    */
   public $hasMany = [
-    'photos' => 'Graker\PhotoAlbums\Models\Photo'
+    'photos' => ['Graker\PhotoAlbums\Models\Photo']
   ];
   public $belongsTo = [
     'user' => ['Backend\Models\User'],
@@ -90,5 +90,5 @@ class Album extends Model
 
     return $this->url = $controller->pageUrl($pageName, $params);
   }
-
+  
 }

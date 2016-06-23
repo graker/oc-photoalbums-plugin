@@ -100,7 +100,6 @@ class AlbumList extends ComponentBase
    * @return AlbumModel[] - prepared array of albums
    */
   protected function prepareAlbums($albums) {
-
     //set up photo count and url
     foreach ($albums as $album) {
       $album->photo_count = $album->photosCount;
