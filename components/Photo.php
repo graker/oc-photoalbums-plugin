@@ -1,6 +1,7 @@
 <?php namespace Graker\PhotoAlbums\Components;
 
 use Cms\Classes\ComponentBase;
+use Cms\Classes\Page;
 use Graker\PhotoAlbums\Models\Photo as PhotoModel;
 
 class Photo extends ComponentBase
@@ -31,7 +32,24 @@ class Photo extends ComponentBase
         'default'     => '{{ :id }}',
         'type'        => 'string'
       ],
+      'albumPage' => [
+        'title'       => 'Album page',
+        'description' => 'Page used to display photo albums',
+        'type'        => 'dropdown',
+        'default'     => 'photoalbums/album',
+      ],
     ];
+  }
+
+
+  /**
+   *
+   * Returns pages list for album page select box setting
+   *
+   * @return mixed
+   */
+  public function getAlbumPageOptions() {
+    return Page::sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
   }
 
 
@@ -51,7 +69,14 @@ class Photo extends ComponentBase
    */
   protected function loadPhoto() {
     $id = $this->property('id');
-    $photo = PhotoModel::where('id', $id)->with('image')->first();
+    $photo = PhotoModel::where('id', $id)
+      ->with('image')
+      ->with('album')
+      ->first();
+
+    // set url so we can have back link to the parent album
+    $photo->album->url = $photo->album->setUrl($this->property('albumPage'), $this->controller);
+    
     return $photo;
   }
 

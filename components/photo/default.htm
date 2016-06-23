@@ -11,10 +11,12 @@
                 style="max-width: 100%" />
     </div>
 </div>
-{% if photo.description %}
-    <div class="photo-description row">
-        <div class="col-xs-12">
+<div class="photo-description row">
+    <div class="col-xs-12">
+        {{ photo.created_at|date('Y/m/d') }}
+        <a href="{{ photo.album.url }}">{{ photo.album.title }}</a>
+        {% if photo.description %}
             {{ photo.description | raw }}
-        </div>
+        {% endif %}
     </div>
-{% endif %}
+</div>
