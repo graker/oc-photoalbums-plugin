@@ -38,6 +38,12 @@ class Photo extends ComponentBase
         'type'        => 'dropdown',
         'default'     => 'photoalbums/album',
       ],
+      'photoPage' => [
+        'title'       => 'Photo page',
+        'description' => 'Page used to display single photo',
+        'type'        => 'dropdown',
+        'default'     => 'photoalbums/album/photo',
+      ],
     ];
   }
 
@@ -49,6 +55,17 @@ class Photo extends ComponentBase
    * @return mixed
    */
   public function getAlbumPageOptions() {
+    return Page::sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
+  }
+
+
+  /**
+   *
+   * Returns pages list for photo page select box setting
+   *
+   * @return mixed
+   */
+  public function getPhotoPageOptions() {
     return Page::sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
   }
 
@@ -76,7 +93,17 @@ class Photo extends ComponentBase
 
     // set url so we can have back link to the parent album
     $photo->album->url = $photo->album->setUrl($this->property('albumPage'), $this->controller);
-    
+
+    //set next and previous photos
+    $photo->next = $photo->nextPhoto();
+    if ($photo->next) {
+      $photo->next->url = $photo->next->setUrl($this->property('photoPage'), $this->controller);
+    }
+    $photo->previous = $photo->previousPhoto();
+    if ($photo->previous) {
+      $photo->previous->url = $photo->previous->setUrl($this->property('photoPage'), $this->controller);
+    }
+
     return $photo;
   }
 

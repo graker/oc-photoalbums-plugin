@@ -19,4 +19,16 @@
             {{ photo.description | raw }}
         {% endif %}
     </div>
+    <div class="text-center col-xs-12">
+        {% if photo.previous %}
+            <a href="{{ photo.previous.url }}">Previous photo</a>
+        {% else %}
+            <span class="disabled">Previous photo</span>
+        {% endif %}
+        {% if photo.next %}
+            <a href="{{ photo.next.url }}">Next photo</a>
+        {% else %}
+            <span class="disabled">Next photo</span>
+        {% endif %}
+    </div>
 </div>
