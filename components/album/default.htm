@@ -2,11 +2,13 @@
 
 <h1>{{ album.title }}</h1>
 
-<div class="album-description row">
-    <div class="col-xs-12">
-        {{ album.description|raw }}
+{% if album.description %}
+    <div class="album-description row">
+        <div class="col-xs-12">
+            {{ album.description|raw }}
+        </div>
     </div>
-</div>
+{% endif %}
 
 <div class="album-photos row">
     {% for photo in album.photos %}
