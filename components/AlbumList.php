@@ -3,9 +3,29 @@
 use Cms\Classes\Page;
 use Cms\Classes\ComponentBase;
 use Graker\PhotoAlbums\Models\Album as AlbumModel;
+use Illuminate\Database\Eloquent\Collection;
+use Redirect;
 
 class AlbumList extends ComponentBase
 {
+
+  /**
+   * @var Collection of albums to display
+   */
+  public $albums;
+
+
+  /**
+   * @return int current page number
+   */
+  public $currentPage;
+
+
+  /**
+   * @var int last page number
+   */
+  public $lastPage;
+
 
   /**
    * @return array of component details
@@ -57,6 +77,15 @@ class AlbumList extends ComponentBase
         'validationPattern' => '^[0-9]+$',
         'required'          => FALSE,
       ],
+      'albumsOnPage' => [
+        'title'             => 'Albums on page',
+        'description'       => 'Amount of albums on one page (to use in pagination)',
+        'default'           => 12,
+        'type'              => 'string',
+        'validationMessage' => 'Photos on page value must be a number',
+        'validationPattern' => '^[0-9]+$',
+        'required'          => FALSE,
+      ],
     ];
   }
 
@@ -90,21 +119,58 @@ class AlbumList extends ComponentBase
 
 
   /**
+   * Get photo page number from query
+   */
+  protected function setCurrentPage() {
+    if (isset($_GET['page'])) {
+      if (ctype_digit($_GET['page']) && ($_GET['page'] > 0)) {
+        $this->currentPage = $_GET['page'];
+      } else {
+        return FALSE;
+      }
+    } else {
+      $this->currentPage = 1;
+    }
+    return TRUE;
+  }
+
+
+  /**
+   * OnRun implementation
+   * Setup pager
+   * Load albums
+   */
+  public function onRun() {
+    if (!$this->setCurrentPage()) {
+      return Redirect::to($this->currentPageUrl() . '?page=1');
+    }
+    $this->albums = $this->loadAlbums();
+    $this->prepareAlbums();
+
+    $this->lastPage = $this->albums->lastPage();
+    //if current page is greater than number of pages, redirect to the last page
+    if ($this->currentPage > $this->lastPage) {
+      return Redirect::to($this->currentPageUrl() . '?page=' . $this->lastPage);
+    }
+  }
+
+
+  /**
    *
    * Returns array of site's albums to be used in component
    * Albums are sorted by created date desc, each one loaded with one latest photo
    *
    * @return array
    */
-  public function albums() {
+  protected function loadAlbums() {
     $albums = AlbumModel::orderBy('created_at', 'desc')
       ->with(['latestPhoto' => function ($query) {
         $query->with('image');
       }])
       ->with('photosCount')
-      ->get();
+      ->paginate($this->property('albumsOnPage'), $this->currentPage);
 
-    return $this->prepareAlbums($albums);
+    return $albums;
   }
 
 
@@ -113,13 +179,10 @@ class AlbumList extends ComponentBase
    * Prepares array of album models to be displayed:
    *  - set up album urls
    *  - set up photo counts
-   *
-   * @param AlbumModel[] $albums - array of albums preparing to display
-   * @return AlbumModel[] - prepared array of albums
    */
-  protected function prepareAlbums($albums) {
+  protected function prepareAlbums() {
     //set up photo count and url
-    foreach ($albums as $album) {
+    foreach ($this->albums as $album) {
       $album->photo_count = $album->photosCount;
       $album->url = $album->setUrl($this->property('albumPage'), $this->controller);
       $album->latestPhoto->thumb = $album->latestPhoto->image->getThumb(
@@ -128,8 +191,6 @@ class AlbumList extends ComponentBase
         ['mode' => $this->property('thumbMode')]
       );
     }
-
-    return $albums;
   }
 
 }
