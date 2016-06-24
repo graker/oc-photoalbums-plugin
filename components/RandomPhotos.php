@@ -45,6 +45,24 @@ class RandomPhotos extends ComponentBase
         'type'        => 'dropdown',
         'default'     => 'auto',
       ],
+      'thumbWidth' => [
+        'title'             => 'Thumb width',
+        'description'       => 'Width of the thumb to be generated',
+        'default'           => 640,
+        'type'              => 'string',
+        'validationMessage' => 'Thumb width must be a number',
+        'validationPattern' => '^[0-9]+$',
+        'required'          => FALSE,
+      ],
+      'thumbHeight' => [
+        'title'             => 'Thumb height',
+        'description'       => 'Height of the thumb to be generated',
+        'default'           => 480,
+        'type'              => 'string',
+        'validationMessage' => 'Thumb height must be a number',
+        'validationPattern' => '^[0-9]+$',
+        'required'          => FALSE,
+      ],
       'photoPage' => [
         'title'       => 'Photo page',
         'description' => 'Page used to display a single photo',
@@ -119,7 +137,11 @@ class RandomPhotos extends ComponentBase
 
     foreach ($photos as $photo) {
       $photo->url = $photo->setUrl($this->property('photoPage'), $this->controller);
-      $photo->thumb = $photo->image->getThumb(640, 480, ['mode' => $this->property('thumbMode')]);
+      $photo->thumb = $photo->image->getThumb(
+        $this->property('thumbWidth'),
+        $this->property('thumbHeight'),
+        ['mode' => $this->property('thumbMode')]
+      );
     }
 
     $this->cachePhotos($photos);

@@ -58,6 +58,24 @@ class Album extends ComponentBase
         'type'        => 'dropdown',
         'default'     => 'auto',
       ],
+      'thumbWidth' => [
+        'title'             => 'Thumb width',
+        'description'       => 'Width of the thumb to be generated',
+        'default'           => 640,
+        'type'              => 'string',
+        'validationMessage' => 'Thumb width must be a number',
+        'validationPattern' => '^[0-9]+$',
+        'required'          => FALSE,
+      ],
+      'thumbHeight' => [
+        'title'             => 'Thumb height',
+        'description'       => 'Height of the thumb to be generated',
+        'default'           => 480,
+        'type'              => 'string',
+        'validationMessage' => 'Thumb height must be a number',
+        'validationPattern' => '^[0-9]+$',
+        'required'          => FALSE,
+      ],
       'photosOnPage' => [
         'title'             => 'Photos on page',
         'description'       => 'Amount of photos on one page (to use in pagination)',
@@ -151,7 +169,11 @@ class Album extends ComponentBase
       //prepare photo urls and thumbs
       foreach ($album->photos as $photo) {
         $photo->url = $photo->setUrl($this->property('photoPage'), $this->controller);
-        $photo->thumb = $photo->image->getThumb(640, 480, ['mode' => $this->property('thumbMode')]);
+        $photo->thumb = $photo->image->getThumb(
+          $this->property('thumbWidth'),
+          $this->property('thumbHeight'),
+          ['mode' => $this->property('thumbMode')]
+        );
       }
       //setup page numbers
       $this->lastPage = ceil($album->photosCount / $this->property('photosOnPage'));

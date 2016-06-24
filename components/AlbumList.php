@@ -39,6 +39,24 @@ class AlbumList extends ComponentBase
         'type'        => 'dropdown',
         'default'     => 'auto',
       ],
+      'thumbWidth' => [
+        'title'             => 'Thumb width',
+        'description'       => 'Width of the thumb to be generated',
+        'default'           => 640,
+        'type'              => 'string',
+        'validationMessage' => 'Thumb width must be a number',
+        'validationPattern' => '^[0-9]+$',
+        'required'          => FALSE,
+      ],
+      'thumbHeight' => [
+        'title'             => 'Thumb height',
+        'description'       => 'Height of the thumb to be generated',
+        'default'           => 480,
+        'type'              => 'string',
+        'validationMessage' => 'Thumb height must be a number',
+        'validationPattern' => '^[0-9]+$',
+        'required'          => FALSE,
+      ],
     ];
   }
 
@@ -104,7 +122,11 @@ class AlbumList extends ComponentBase
     foreach ($albums as $album) {
       $album->photo_count = $album->photosCount;
       $album->url = $album->setUrl($this->property('albumPage'), $this->controller);
-      $album->latestPhoto->thumb = $album->latestPhoto->image->getThumb(640, 480, ['mode' => $this->property('thumbMode')]);
+      $album->latestPhoto->thumb = $album->latestPhoto->image->getThumb(
+        $this->property('thumbWidth'),
+        $this->property('thumbHeight'),
+        ['mode' => $this->property('thumbMode')]
+      );
     }
 
     return $albums;
