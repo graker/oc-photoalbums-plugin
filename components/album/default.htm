@@ -24,3 +24,21 @@
         <div class="col-xs-12 no-data">Album doesn't have any photos yet</div>
     {% endfor %}
 </div>
+
+{% if __SELF__.lastPage > 1 %}
+<ul class="pagination">
+    {% if __SELF__.currentPage > 1 %}
+    <li><a href="{{ this.page.baseFileName|page }}?page={{ __SELF__.currentPage-1 }}">&larr; Prev</a></li>
+    {% endif %}
+
+    {% for page in 1..__SELF__.lastPage %}
+    <li class="{{ __SELF__.currentPage == page ? 'active' : null }}">
+        <a href="{{ this.page.baseFileName|page }}?page={{ page }}">{{ page }}</a>
+    </li>
+    {% endfor %}
+
+    {% if __SELF__.lastPage > __SELF__.currentPage %}
+    <li><a href="{{ this.page.baseFileName|page }}?page={{ __SELF__.currentPage+1 }}">Next &rarr;</a></li>
+    {% endif %}
+</ul>
+{% endif %}

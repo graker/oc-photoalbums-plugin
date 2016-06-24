@@ -3,6 +3,7 @@
 use Cms\Classes\Page;
 use Cms\Classes\ComponentBase;
 use Graker\PhotoAlbums\Models\Album as AlbumModel;
+use Redirect;
 
 class Album extends ComponentBase
 {
@@ -11,6 +12,19 @@ class Album extends ComponentBase
    * @var AlbumModel reference to album being displayed
    */
   public $album;
+
+
+  /**
+   * @return int current page number
+   */
+  public $currentPage;
+
+
+  /**
+   * @var int last page number
+   */
+  public $lastPage;
+
 
   public function componentDetails()
   {
@@ -44,6 +58,15 @@ class Album extends ComponentBase
         'type'        => 'dropdown',
         'default'     => 'auto',
       ],
+      'photosOnPage' => [
+        'title'             => 'Photos on page',
+        'description'       => 'Amount of photos on one page (to use in pagination)',
+        'default'           => 12,
+        'type'              => 'string',
+        'validationMessage' => 'Photos on page value must be a number',
+        'validationPattern' => '^[0-9]+$',
+        'required'          => FALSE,
+      ],
     ];
   }
 
@@ -74,13 +97,37 @@ class Album extends ComponentBase
     ];
   }
 
-  //TODO introduce photos pagination
+
+  /**
+   * Get photo page number from query
+   */
+  protected function setCurrentPage() {
+    if (isset($_GET['page'])) {
+      if (ctype_digit($_GET['page']) && ($_GET['page'] > 0)) {
+        $this->currentPage = $_GET['page'];
+      } else {
+        return FALSE;
+      }
+    } else {
+      $this->currentPage = 1;
+    }
+    return TRUE;
+  }
+
 
   /**
    * Loads album on onRun event
    */
   public function onRun() {
+    if (!$this->setCurrentPage()) {
+      //if page parameter is invalid, redirect to the first page
+      return Redirect::to($this->currentPageUrl() . '?page=1');
+    }
     $this->album = $this->loadAlbum();
+    //if current page is greater than number of pages, redirect to the last page
+    if ($this->currentPage > $this->lastPage) {
+      return Redirect::to($this->currentPageUrl() . '?page=' . $this->lastPage);
+    }
   }
 
 
@@ -96,6 +143,7 @@ class Album extends ComponentBase
       ->with(['photos' => function ($query) {
         $query->orderBy('created_at', 'desc');
         $query->with('image');
+        $query->paginate($this->property('photosOnPage'), $this->currentPage);
       }])
       ->first();
 
@@ -105,6 +153,8 @@ class Album extends ComponentBase
         $photo->url = $photo->setUrl($this->property('photoPage'), $this->controller);
         $photo->thumb = $photo->image->getThumb(640, 480, ['mode' => $this->property('thumbMode')]);
       }
+      //setup page numbers
+      $this->lastPage = ceil($album->photosCount / $this->property('photosOnPage'));
     }
 
     return $album;
