@@ -36,6 +36,7 @@ class Plugin extends PluginBase
       'Graker\PhotoAlbums\Components\Photo' => 'singlePhoto',
       'Graker\PhotoAlbums\Components\Album' => 'photoAlbum',
       'Graker\PhotoAlbums\Components\AlbumList' => 'albumList',
+      'Graker\PhotoAlbums\Components\RandomPhotos' => 'randomPhotos',
     ];
   }
 

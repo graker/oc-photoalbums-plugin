@@ -1,0 +1,12 @@
+<div class="random-photos">
+    {% for photo in __SELF__.photos() %}
+    <div class="photo">
+        <a href="{{ photo.url }}"><img src="{{ photo.thumb }}" /></a>
+        {% if photo.title %}
+            <a href="{{ photo.url }}">{{ photo.title }}</a>
+        {% endif %}
+    </div>
+    {% else %}
+        You have not created any photos
+    {% endfor %}
+</div>
