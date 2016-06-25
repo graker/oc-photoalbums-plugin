@@ -72,6 +72,12 @@ class Plugin extends PluginBase
         'order'       => 500,
 
         'sideMenu' => [
+          'upload_photos' => [
+            'label'       => 'Upload photos',
+            'icon'        => 'icon-upload',
+            'url'         => Backend::url('graker/photoalbums/upload/form'),
+            'permissions' => ['graker.photoalbums.manage_albums'],
+          ],
           'new_album' => [
             'label'       => 'New album',
             'icon'        => 'icon-plus',

@@ -1,0 +1,51 @@
+<?php Block::put('breadcrumb') ?>
+    <ul>
+        <li><a href="<?= Backend::url('graker/photoalbums/albums') ?>">Albums</a></li>
+        <li>Upload multiple photos</li>
+    </ul>
+<?php Block::endPut() ?>
+
+<?php if (!$this->fatalError): ?>
+    <?= Form::open(['file' => TRUE, 'class' => 'layout',]) ?>
+        <div class="layout-row">
+            <div class="form-group">
+                <?= Form::label('album', 'Album to upload to') ?>
+                <?= Form::select('album', $this->getAlbumsList()) ?>
+            </div>
+            <div class="form-group">
+                <div class="field-fileupload" data-url="<?= Backend::url('graker/photoalbums/upload/post_files') ?>">
+                    <div class="btn btn-primary dz-message">
+                        Upload photos
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div id="filesContainer" class="dropzone-previews dropzone">
+                </div>
+            </div>
+        </div>
+
+        <div class="form-buttons">
+            <div class="loading-indicator-container">
+                <button
+                    type="submit"
+                    data-request="onSave"
+                    data-hotkey="ctrl+s, cmd+s"
+                    data-load-indicator="Saving upload..."
+                    class="btn btn-primary">
+                    Save upload
+                </button>
+                <span class="btn-text">
+                    or <a href="<?= Backend::url('graker/photoalbums/albums') ?>">Cancel</a>
+                </span>
+            </div>
+        </div>
+
+    <?= Form::close() ?>
+
+<?php else: ?>
+
+    <p class="flash-message static error"><?= e($this->fatalError) ?></p>
+    <p><a href="<?= Backend::url('graker/photoalbums/albums') ?>" class="btn btn-default">Return to albums list</a></p>
+
+<?php endif ?>
