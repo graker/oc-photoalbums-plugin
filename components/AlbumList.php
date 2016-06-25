@@ -159,11 +159,13 @@ class AlbumList extends ComponentBase
    *
    * Returns array of site's albums to be used in component
    * Albums are sorted by created date desc, each one loaded with one latest photo
+   * Empty albums won't be displayed
    *
    * @return array
    */
   protected function loadAlbums() {
     $albums = AlbumModel::orderBy('created_at', 'desc')
+      ->has('photos')
       ->with(['latestPhoto' => function ($query) {
         $query->with('image');
       }])
