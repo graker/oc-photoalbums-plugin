@@ -47,9 +47,6 @@ class Upload extends Controller
       $file->is_public = true;
       $file->save();
 
-      Log::info($file);
-      Log::info(Input::all());
-
       return Response::json(['id' => $file->id], 200);
     }
   }
@@ -63,11 +60,13 @@ class Upload extends Controller
     Log::info($input);
     Flash::success('Photos are saved!');
 
-    //TODO add album saving
     $album = AlbumModel::find($input['album']);
-    //TODO check out attaching and creating
+    if ($album && !empty($input['file-id'])) {
+      Log::info('saving photos');
+      $this->savePhotos($album, $input['file-id']);
+      return Redirect::to(Backend::url('graker/photoalbums/albums/update/' . $album->id));
+    }
 
-    //TODO maybe should redirect to the album updated
     return Redirect::to(Backend::url('graker/photoalbums/albums'));
   }
 
@@ -83,6 +82,26 @@ class Upload extends Controller
         $file->delete();
       }
     }
+  }
+
+
+  /**
+   *
+   * Saves photos with files attached from $file_ids and attaches them to album
+   *
+   * @param AlbumModel $album
+   * @param array $file_ids
+   */
+  protected function savePhotos($album, $file_ids) {
+    $files = File::whereIn('id', $file_ids)->get();
+    $photos = array();
+    foreach ($files as $file) {
+      $photo = new PhotoModel();
+      $photo->save();
+      $photo->image()->save($file);
+      $photos[] = $photo;
+    }
+    $album->photos()->saveMany($photos);
   }
 
 

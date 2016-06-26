@@ -21,6 +21,13 @@ class Photo extends Model
   ];
 
   /**
+   * @var array of fillable fields to use in mass assignment
+   */
+  protected $fillable = [
+    'title', 'description',
+  ];
+
+  /**
    * @var array Relations
    */
   public $belongsTo = [
@@ -87,7 +94,9 @@ class Photo extends Model
    * Using it to delete attached
    */
   public function beforeDelete() {
-    $this->image->delete();
+    if ($this->image) {
+      $this->image->delete();
+    }
   }
 
 }
