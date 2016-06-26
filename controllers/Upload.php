@@ -8,11 +8,12 @@ use Redirect;
 use Backend;
 use Flash;
 use Input;
+use Request;
 use Response;
+use Validator;
+use ValidationException;
+use ApplicationException;
 use System\Models\File;
-
-//TODO remove later on
-use Log;
 
 /**
  * Upload Back-end Controller
@@ -36,18 +37,33 @@ class Upload extends Controller
    * File upload controller
    */
   public function post_files() {
-    if (Input::hasFile('file')) {
+    try {
+      if (!Input::hasFile('file')) {
+        throw new ApplicationException('No file in request');
+      }
+
       $upload = Input::file('file');
 
-      //TODO add validation
-      //TODO add try-catch
+      $validationRules = ['max:'.File::getMaxFilesize()];
+
+      $validation = Validator::make(
+        ['file' => $upload],
+        ['file' => $validationRules]
+      );
+      if ($validation->fails()) {
+        throw new ValidationException($validation);
+      }
+      if (!$upload->isValid()) {
+        throw new ApplicationException(sprintf('File %s is not valid.', $upload->getClientOriginalName()));
+      }
 
       $file = new File;
       $file->data = $upload;
       $file->is_public = true;
       $file->save();
-
       return Response::json(['id' => $file->id], 200);
+    } catch (Exception $e) {
+      return Response::json($e->getMessage(), 400);
     }
   }
 
@@ -57,16 +73,15 @@ class Upload extends Controller
    */
   public function onSave() {
     $input = Input::all();
-    Log::info($input);
-    Flash::success('Photos are saved!');
 
     $album = AlbumModel::find($input['album']);
     if ($album && !empty($input['file-id'])) {
-      Log::info('saving photos');
       $this->savePhotos($album, $input['file-id']);
+      Flash::success('Photos are saved!');
       return Redirect::to(Backend::url('graker/photoalbums/albums/update/' . $album->id));
     }
 
+    Flash::error('Album was not found.');
     return Redirect::to(Backend::url('graker/photoalbums/albums'));
   }
 
