@@ -35,26 +35,31 @@ Use this component to output all albums (pagination is supported). For each albu
 
 Displays given number of random photos.
 
+## Uploading
+
+At the moment, there are 3 ways to upload photos:
+
+* Add single photo using the New photo form
+* Add single photo using relations manager when in album update form
+* Add multiple photos to an album from the Upload photos form
+
+Uploading multiple photos is supported with the [Dropzone.js](http://www.dropzonejs.com/) plugin. You don't need to install it as it is already a part of October.
+
 ## Roadmap
-
-### Multiupload widget
-
-At the moment, there are two ways to add new photos:
-
-* from the new photo form
-* using relations manager in the album form
-
-In both cases you can only add photos one by one. The primary goal right now is to add image multiuploader to the plugin.
 
 ### Attachments location
 
 Right now plugin uses System\Models\File to attach images so they are stored in system uploads, each one in separate directory with random names. 
 It could be nice to put them in one directory per album.
 
+### Categories support for albums
+
+It would be nice to be able to separate albums by categories, to group them by categories in the AlbumsList component etc.
+
 ### Photos reordering
 
 On album's page photos are sorted by creation date (desc). Need to add some reordering abilities.
 
-### Ajax rendering (for photo page) and navigation
+### Ajax support (for photo page rendering and navigation)
 
 This one is not a priority right now.
