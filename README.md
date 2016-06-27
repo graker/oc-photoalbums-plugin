@@ -33,7 +33,7 @@ Use this component to output all albums (pagination is supported). For each albu
 
 ### Random Photos
 
-Displays given number of random photos.
+Displays given number of random photos. Note that for big database tables, selects with random sorting can slow down your site, so use the component with caution and make use of cache lifetime to avoid running the query on each component show. Also note that due to the use of RAND() function for sorting, the component would work with MySQL database only. To use the component with other databases, you'd need to rewrite orderBy() call. And apparently there's no general DB-independent method in Laravel to do random sorting.
 
 ## Uploading
 
