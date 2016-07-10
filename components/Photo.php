@@ -74,7 +74,7 @@ class Photo extends ComponentBase
    * Loads photo on onRun event
    */
   public function onRun() {
-    $this->photo = $this->loadPhoto();
+    $this->photo = $this->page->photo = $this->loadPhoto();
   }
 
 

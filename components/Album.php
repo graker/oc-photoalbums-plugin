@@ -141,7 +141,7 @@ class Album extends ComponentBase
       // if page parameter is invalid, redirect to the first page
       return Redirect::to($this->currentPageUrl() . '?page=1');
     }
-    $this->album = $this->loadAlbum();
+    $this->album = $this->page->album = $this->loadAlbum();
     // if current page is greater than number of pages, redirect to the last page
     // check for > 1 to avoid infinite redirect when there are no photos
     if (($this->currentPage > 1) && ($this->currentPage > $this->lastPage)) {
