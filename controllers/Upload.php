@@ -76,7 +76,7 @@ class Upload extends Controller
 
     $album = AlbumModel::find($input['album']);
     if ($album && !empty($input['file-id'])) {
-      $this->savePhotos($album, $input['file-id']);
+      $this->savePhotos($album, $input['file-id'], $input['file-title']);
       Flash::success('Photos are saved!');
       return Redirect::to(Backend::url('graker/photoalbums/albums/update/' . $album->id));
     }
@@ -98,20 +98,22 @@ class Upload extends Controller
       }
     }
   }
-
-
+  
+  
   /**
    *
    * Saves photos with files attached from $file_ids and attaches them to album
    *
    * @param AlbumModel $album
    * @param array $file_ids
+   * @param string[] $file_titles arrray of titles
    */
-  protected function savePhotos($album, $file_ids) {
+  protected function savePhotos($album, $file_ids, $file_titles) {
     $files = File::whereIn('id', $file_ids)->get();
     $photos = array();
     foreach ($files as $file) {
       $photo = new PhotoModel();
+      $photo->title = isset($file_titles[$file->id]) ? $file_titles[$file->id] : '';
       $photo->save();
       $photo->image()->save($file);
       $photos[] = $photo;

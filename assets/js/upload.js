@@ -49,7 +49,7 @@
       $preview.data('id', response.id);
       // hidden value to pass file id when saving form
       $preview.append('<input type="hidden" name="file-id[' + response.id + ']" value="' + response.id + '">');
-      //TODO we can prepend titles to pictures!
+      $preview.append('<div class="form-group"><input type="text" name="file-title[' + response.id + ']" class="form-control"></div>');
     }
   };
 

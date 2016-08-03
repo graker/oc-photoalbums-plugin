@@ -387,3 +387,6 @@
     border-right: 6px solid transparent;
     border-bottom: 6px solid #be2626;
 }
+.dropzone input.form-control {
+    width: 120px;
+}
