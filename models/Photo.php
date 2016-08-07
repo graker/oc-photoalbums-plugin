@@ -1,5 +1,6 @@
 <?php namespace Graker\PhotoAlbums\Models;
 
+use Illuminate\Database\Eloquent\Collection;
 use Model;
 
 /**
@@ -42,16 +43,25 @@ class Photo extends Model
   /**
    *
    * Returns next photo or NULL if this is the last in the album
-   * TODO when there is a mass uploader implemented, we have to invent better sorting since created_at will be equal for multiple loaded photos
    *
    * @return Photo
    */
   public function nextPhoto() {
-    $photo = Photo::where('created_at', '>', $this->created_at)
-      ->where('album_id', '=', $this->album_id)
-      ->orderBy('created_at', 'asc')
-      ->first();
-    return $photo;
+    $next = NULL;
+    $current_found = FALSE;
+    
+    foreach ($this->album->photos as $photo) {
+      if ($current_found) {
+        // previous iteration was current photo, so we found the next one
+        $next = $photo;
+        break;
+      }
+      if ($photo->id == $this->id) {
+        $current_found = TRUE;
+      }
+    }
+    
+    return $next;
   }
 
 
@@ -62,11 +72,18 @@ class Photo extends Model
    * @return Photo
    */
   public function previousPhoto() {
-    $photo = Photo::where('created_at', '<', $this->created_at)
-      ->where('album_id', '=', $this->album_id)
-      ->orderBy('created_at', 'desc')
-      ->first();
-    return $photo;
+    $previous = NULL;
+    
+    foreach ($this->album->photos as $photo) {
+      if ($photo->id == $this->id) {
+        // found current photo
+        break;
+      } else {
+        $previous = $photo;
+      }
+    }
+    
+    return $previous;
   }
 
 

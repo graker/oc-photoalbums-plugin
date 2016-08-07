@@ -25,7 +25,10 @@ class Album extends Model
    * @var array Relations
    */
   public $hasMany = [
-    'photos' => ['Graker\PhotoAlbums\Models\Photo']
+    'photos' => [
+      'Graker\PhotoAlbums\Models\Photo',
+      'order' => 'created_at desc',
+    ]
   ];
   public $belongsTo = [
     'user' => ['Backend\Models\User'],
