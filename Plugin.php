@@ -2,6 +2,7 @@
 
 use Backend;
 use System\Classes\PluginBase;
+use Event;
 
 /**
  * PhotoAlbums Plugin Information File
@@ -105,6 +106,15 @@ class Plugin extends PluginBase
         ],
       ],
     ];
+  }
+
+
+  /**
+   * boot() implementation
+   *  - Register listener to markdown.parse
+   */
+  public function boot() {
+    Event::listen('markdown.parse', 'Graker\PhotoAlbums\Classes\MarkdownPhotoInsert@parse');
   }
 
 }
