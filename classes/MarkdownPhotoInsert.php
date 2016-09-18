@@ -12,7 +12,7 @@ use Graker\PhotoAlbums\Models\Photo;
 
 /**
  * Class MarkdownPhotoInsert
- * Parses Markdown text to replace
+ * Parses Markdown text to replace [photo:123:640:480:auto] placeholders with links to actual images from photo gallery
  *
  * @package Graker\PhotoAlbums\Classes
  */
