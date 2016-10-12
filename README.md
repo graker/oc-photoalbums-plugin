@@ -60,7 +60,7 @@ To do that, insert `[photo:id:width:height:mode]` into the text. Here:
 For example: 
 
 * `[photo:123:640:480:crop]` for cropped thumbnail 640x480 of photo with id 123
-* `[photo:123:200:200:crop]` for thumbnail 200x480 of photo with id 123
+* `[photo:123:200:200]` for thumbnail 200x200 of photo with id 123
 * `[photo:123]` for image as is, no thumb
 
 The placeholder will be replaced with path to image (or thumb), for example: `/storage/app/uploads/public/57a/24e/bff/thumb_301_640x480_0_0_auto.jpg`.
