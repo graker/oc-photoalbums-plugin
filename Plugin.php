@@ -147,11 +147,16 @@ class Plugin extends PluginBase
    * @return string
    */
   function evalImageListColumn($value, $column, $record) {
-    $thumb = $record->image->getThumb(
-      isset($column->config['width']) ? $column->config['width'] : 200,
-      isset($column->config['height']) ? $column->config['height'] : 200,
-      ['mode' => 'auto']
-    );
+    if ($record->has('image')) {
+      $thumb = $record->image->getThumb(
+        isset($column->config['width']) ? $column->config['width'] : 200,
+        isset($column->config['height']) ? $column->config['height'] : 200,
+        ['mode' => 'auto']
+      );
+    } else {
+      // in case the file attachment was manually deleted for some reason
+      $thumb = '';
+    }
     return "<img src=\"$thumb\" />";
   }
 
