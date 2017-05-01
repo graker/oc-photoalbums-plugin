@@ -118,6 +118,7 @@ class Plugin extends PluginBase
   public function registerListColumnTypes() {
     return [
       'is_front' => [$this, 'evalIsFrontListColumn'],
+      'image' => [$this, 'evalImageListColumn'],
     ];
   }
 
@@ -133,6 +134,25 @@ class Plugin extends PluginBase
    */
   public function evalIsFrontListColumn($value, $column, $record) {
     return ($value == $record->id) ? 'Yes' : '';
+  }
+
+
+  /**
+   *
+   * Column to render image thumb for Photo model
+   *
+   * @param $value
+   * @param $column
+   * @param $record
+   * @return string
+   */
+  function evalImageListColumn($value, $column, $record) {
+    $thumb = $record->image->getThumb(
+      isset($column->config['width']) ? $column->config['width'] : 200,
+      isset($column->config['height']) ? $column->config['height'] : 200,
+      ['mode' => 'auto']
+    );
+    return "<img src=\"$thumb\" />";
   }
 
 
