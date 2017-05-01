@@ -32,7 +32,9 @@ This component is used to output album's photos. Data available:
 
 ### Albums list
 
-Use this component to output all albums (pagination is supported). For each album you can output title, image thumb and photos count.
+Use this component to output all albums (pagination is supported). For each album you can output title, image thumb and photos count. 
+Image thumb is generated from selected front photo which you can set on album's edit page in the photos list (check the photo, click "Set as front" button). 
+If no photo is selected is front, the latest uploaded photo will be used for thumb.
 
 ### Random Photos
 

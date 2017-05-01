@@ -159,7 +159,7 @@ class AlbumList extends ComponentBase
   /**
    *
    * Returns array of site's albums to be used in component
-   * Albums are sorted by created date desc, each one loaded with one latest photo
+   * Albums are sorted by created date desc, each one loaded with one latest photo (or photo set to be front)
    * Empty albums won't be displayed
    *
    * @return array
@@ -168,6 +168,9 @@ class AlbumList extends ComponentBase
     $albums = AlbumModel::orderBy('created_at', 'desc')
       ->has('photos')
       ->with(['latestPhoto' => function ($query) {
+        $query->with('image');
+      }])
+      ->with(['front' => function ($query) {
         $query->with('image');
       }])
       ->with('photosCount')
@@ -182,13 +185,17 @@ class AlbumList extends ComponentBase
    * Prepares array of album models to be displayed:
    *  - set up album urls
    *  - set up photo counts
+   *  - set up album thumb
    */
   protected function prepareAlbums() {
     //set up photo count and url
     foreach ($this->albums as $album) {
       $album->photo_count = $album->photosCount;
       $album->url = $album->setUrl($this->property('albumPage'), $this->controller);
-      $album->latestPhoto->thumb = $album->latestPhoto->image->getThumb(
+
+      // prepare thumb from $album->front if it is set or from latestPhoto otherwise
+      $image = ($album->front) ? $album->front->image : $album->latestPhoto->image;
+      $album->latestPhoto->thumb = $image->getThumb(
         $this->property('thumbWidth'),
         $this->property('thumbHeight'),
         ['mode' => $this->property('thumbMode')]
