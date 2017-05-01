@@ -7,6 +7,12 @@ columns:
         label: Title
         searchable: true
 
+    front:
+        label: Front
+        relation: album
+        select: front_id
+        type: is_front
+
     album:
         label: Album
         valueFrom: title

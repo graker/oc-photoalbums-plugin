@@ -110,6 +110,33 @@ class Plugin extends PluginBase
 
 
   /**
+   *
+   * Custom column types definition
+   *
+   * @return array
+   */
+  public function registerListColumnTypes() {
+    return [
+      'is_front' => [$this, 'evalIsFrontListColumn'],
+    ];
+  }
+
+
+  /**
+   *
+   * Special column to show photo set to be album's front in album's relations list
+   *
+   * @param $value
+   * @param $column
+   * @param $record
+   * @return string
+   */
+  public function evalIsFrontListColumn($value, $column, $record) {
+    return ($value == $record->id) ? 'Yes' : '';
+  }
+
+
+  /**
    * boot() implementation
    *  - Register listener to markdown.parse
    */

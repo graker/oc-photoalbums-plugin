@@ -37,7 +37,7 @@ class Albums extends Controller
    * Ajax callback to set Photo as Album's front photo
    *
    * @param null|int $recordId album id
-   * @return string empty on ok or error string in json on error
+   * @return string relation refresh or error string in json if there's error
    */
   public function update_onRelationButtonSetFront($recordId = NULL) {
     // get album
@@ -70,7 +70,8 @@ class Albums extends Controller
     $album->front_id = $photo->id;
     $album->save();
 
-    return '';
+    $this->initRelation($album, 'photos');
+    return $this->relationRefresh('photos');
   }
 
 }
