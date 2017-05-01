@@ -9,4 +9,4 @@ photos:
         list: $/graker/photoalbums/models/photo/columns.yaml
     view:
         list: $/graker/photoalbums/models/photo/columns.yaml
-        toolbarButtons: create|delete
+        toolbarPartial: relation_toolbar

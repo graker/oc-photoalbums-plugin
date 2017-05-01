@@ -32,6 +32,7 @@ class Album extends Model
   ];
   public $belongsTo = [
     'user' => ['Backend\Models\User'],
+    'front' => ['Graker\PhotoAlbums\Models\Photo'],
   ];
 
 
