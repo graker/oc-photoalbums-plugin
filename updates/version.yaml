@@ -6,3 +6,6 @@
 1.1.0:
     - Add ability to select front photo for album from the interface
     - add_album_front.php
+1.2.0:
+    - Added ability to reorder photos in the album
+    - add_sort_order_field.php

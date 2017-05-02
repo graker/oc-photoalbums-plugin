@@ -27,7 +27,7 @@ class Album extends Model
   public $hasMany = [
     'photos' => [
       'Graker\PhotoAlbums\Models\Photo',
-      'order' => 'created_at desc',
+      'order' => 'sort_order asc, created_at desc',
     ]
   ];
   public $belongsTo = [

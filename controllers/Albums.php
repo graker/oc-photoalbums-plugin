@@ -7,6 +7,7 @@ use Graker\PhotoAlbums\Models\Album;
 use Graker\PhotoAlbums\Models\Photo;
 use ApplicationException;
 use Response;
+use Request;
 
 use League\Flysystem\Exception;
 
@@ -72,6 +73,22 @@ class Albums extends Controller
 
     $this->initRelation($album, 'photos');
     return $this->relationRefresh('photos');
+  }
+
+
+  /**
+   *
+   * Returns path to reorder current album (should be in formModel)
+   *
+   * @return string
+   */
+  protected function getReorderPath() {
+    if (!isset($this->vars['formModel']->id)) {
+      return '';
+    }
+
+    $uri = \Backend::url('graker/photoalbums/reorder/album/' . $this->vars['formModel']->id);
+    return $uri;
   }
 
 }

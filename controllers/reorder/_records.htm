@@ -1,0 +1,11 @@
+<?php foreach ($records as $record): ?>
+
+<li data-record-id="<?= $record->getKey() ?>" data-record-sort-order="<?= $record->{$record->getSortOrderColumn()} ?>" >
+    <div class="record">
+        <a href="javascript:;" class="move"></a>
+        <span><?= $record->title ?></span>
+        <input name="record_ids[]" type="hidden" value="<?= $record->getKey() ?>" />
+    </div>
+</li>
+
+<?php endforeach ?>

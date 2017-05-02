@@ -1,0 +1,36 @@
+<?php Block::put('breadcrumb') ?>
+<ul>
+    <li><a href="<?= Backend::url('graker/photoalbums/albums') ?>">Albums</a></li>
+    <li><a href="<?= Backend::url('graker/photoalbums/albums/update/' . $this->model->id) ?>"><?= e($this->model->title) ?></a></li>
+    <li>Reorder</li>
+</ul>
+<?php Block::endPut() ?>
+
+<?php if (!$this->fatalError): ?>
+<!-- Reorder List -->
+<?= Form::open() ?>
+<div
+        id="reorderTreeList"
+        class="control-treelist"
+        data-control="treelist"
+        <?= $reorderShowTree ? '' : 'data-nested="0"' ?>
+        data-handle="<?= $reorderShowTree ? 'a.move' : '> li > .record > a.move' ?>"
+        data-stripe-load-indicator>
+            <?php if ($reorderRecords): ?>
+            <ol id="reorderRecords">
+                <?= $this->makePartial('records', ['records' => $reorderRecords]) ?>
+            </ol>
+            <?php else: ?>
+            <p><?= Lang::get('backend::lang.reorder.no_records') ?></p>
+        <?php endif ?>
+</div>
+<?= Form::close() ?>
+
+<script>
+    $.oc.reorderBehavior.initSorting('simple')
+</script>
+
+<?php else: ?>
+    <p class="flash-message static error"><?= e($this->fatalError) ?></p>
+    <p><a href="<?= Backend::url('graker/photoalbums/albums') ?>" class="btn btn-default">Return to albums list</a></p>
+<?php endif ?>

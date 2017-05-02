@@ -9,6 +9,9 @@ use Model;
 class Photo extends Model
 {
 
+  // Photos must be sortable
+  use \October\Rain\Database\Traits\Sortable;
+
   /**
    * @var string The database table used by the model.
    */
