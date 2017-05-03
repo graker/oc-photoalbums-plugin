@@ -9,3 +9,6 @@
 1.2.0:
     - Added ability to reorder photos in the album
     - add_sort_order_field.php
+1.2.1:
+    - Fill default sort_order values for existing photos
+    - update_sort_order_on_existing_photos.php
