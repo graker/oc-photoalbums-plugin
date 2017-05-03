@@ -2,7 +2,7 @@
 
 <li data-record-id="<?= $record->getKey() ?>" data-record-sort-order="<?= $record->{$record->getSortOrderColumn()} ?>" >
     <div class="record">
-        <a href="javascript:;" class="move"></a>
+        <a href="javascript:;" class="move"><img src="<?= $record->image->getThumb(100, 100, ['mode' => 'auto']); ?>"/></a>
         <span><?= $record->title ?></span>
         <input name="record_ids[]" type="hidden" value="<?= $record->getKey() ?>" />
     </div>
