@@ -36,8 +36,7 @@ class Reorder extends Controller
     $this->model = $album;
     $this->addJs('/modules/backend/behaviors/reordercontroller/assets/js/october.reorder.js', 'core');
 
-    // TODO add more fields to show images
-    // TODO set title at reorder page
+    $this->pageTitle = 'Reordering album ' . $album->title;
 
     return $this->makePartial('reorder', ['reorderRecords' => $this->model->photos, 'reorderShowTree' => FALSE,]);
   }
