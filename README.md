@@ -84,11 +84,3 @@ It could be nice to put them in one directory per album.
 ### Categories support for albums
 
 It would be nice to be able to separate albums by categories, to group them by categories in the AlbumsList component etc.
-
-### Photos reordering
-
-On album's page photos are sorted by creation date (desc). Need to add some reordering abilities.
-
-### Ajax support (for photo page rendering and navigation)
-
-This one is not a priority right now.
