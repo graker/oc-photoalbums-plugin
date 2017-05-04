@@ -3,6 +3,7 @@
 use Backend;
 use System\Classes\PluginBase;
 use Event;
+use Lang;
 
 /**
  * PhotoAlbums Plugin Information File
@@ -18,11 +19,11 @@ class Plugin extends PluginBase
   public function pluginDetails()
   {
     return [
-      'name'        => 'PhotoAlbums',
-      'description' => 'Create, display and manage galleries of photos arranged in albums',
+      'name'        => 'graker.photoalbums::lang.plugin.name',
+      'description' => 'graker.photoalbums::lang.plugin.description',
       'author'      => 'Graker',
       'icon'        => 'icon-camera-retro',
-      'homepage'    => 'https://github.com/graker/photoalbums',
+      'homepage'    => 'https://github.com/graker/oc-photoalbums-plugin',
     ];
   }
 
@@ -51,8 +52,8 @@ class Plugin extends PluginBase
   {
     return [
       'graker.photoalbums.manage_albums' => [
-        'label' => 'Manage photo albums',
-        'tab' => 'Photo albums',
+        'label' => 'graker.photoalbums::lang.plugin.manage_albums',
+        'tab' => 'graker.photoalbums::lang.plugin.tab',
       ],
     ];
   }
@@ -66,7 +67,7 @@ class Plugin extends PluginBase
   {
     return [
       'photoalbums' => [
-        'label' => 'Photo albums',
+        'label' => 'graker.photoalbums::lang.plugin.tab',
         'url' => Backend::url('graker/photoalbums/albums'),
         'icon'        => 'icon-camera-retro',
         'permissions' => ['graker.photoalbums.manage_albums'],
@@ -74,31 +75,31 @@ class Plugin extends PluginBase
 
         'sideMenu' => [
           'upload_photos' => [
-            'label'       => 'Upload photos',
+            'label'       => 'graker.photoalbums::lang.plugin.upload_photos',
             'icon'        => 'icon-upload',
             'url'         => Backend::url('graker/photoalbums/upload/form'),
             'permissions' => ['graker.photoalbums.manage_albums'],
           ],
           'new_album' => [
-            'label'       => 'New album',
+            'label'       => 'graker.photoalbums::lang.plugin.new_album',
             'icon'        => 'icon-plus',
             'url'         => Backend::url('graker/photoalbums/albums/create'),
             'permissions' => ['graker.photoalbums.manage_albums'],
           ],
-          'posts' => [
-            'label'       => 'Albums',
+          'albums' => [
+            'label'       => 'graker.photoalbums::lang.plugin.albums',
             'icon'        => 'icon-copy',
             'url'         => Backend::url('graker/photoalbums/albums'),
             'permissions' => ['graker.photoalbums.manage_albums'],
           ],
           'new_photo' => [
-            'label'       => 'New photo',
+            'label'       => 'graker.photoalbums::lang.plugin.new_photo',
             'icon'        => 'icon-plus-square-o',
             'url'         => Backend::url('graker/photoalbums/photos/create'),
             'permissions' => ['graker.photoalbums.manage_albums'],
           ],
           'photos' => [
-            'label'       => 'Photos',
+            'label'       => 'graker.photoalbums::lang.plugin.photos',
             'icon'        => 'icon-picture-o',
             'url'         => Backend::url('graker/photoalbums/photos'),
             'permissions' => ['graker.photoalbums.manage_albums'],
@@ -133,7 +134,7 @@ class Plugin extends PluginBase
    * @return string
    */
   public function evalIsFrontListColumn($value, $column, $record) {
-    return ($value == $record->id) ? 'Yes' : '';
+    return ($value == $record->id) ? Lang::get('graker.photoalbums::lang.plugin.bool_positive') : '';
   }
 
 

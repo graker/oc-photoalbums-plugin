@@ -8,6 +8,7 @@ use Graker\PhotoAlbums\Models\Photo;
 use ApplicationException;
 use Response;
 use Request;
+use Lang;
 
 use League\Flysystem\Exception;
 
@@ -45,7 +46,7 @@ class Albums extends Controller
     $album = Album::find($recordId);
     if (!$album) {
       // album not found
-      return Response::json('Album not found!', 400);
+      return Response::json(Lang::get('graker.photoalbums::lang.errors.album_not_found'), 400);
     }
 
     // get first checked photo
@@ -57,11 +58,11 @@ class Albums extends Controller
     $photo = Photo::find($photo_id);
     try {
       if (!$photo) {
-        throw new ApplicationException('Can\'t find selected photo!');
+        throw new ApplicationException(Lang::get('graker.photoalbums::lang.errors.cant_find_selected'));
       }
       if ($photo->album_id != $album->id) {
         // attempt to use other album's photo
-        throw new ApplicationException('Selected photo doesn\'t belong to this album!');
+        throw new ApplicationException(Lang::get('graker.photoalbums::lang.errors.not_this_album'));
       }
     } catch (Exception $e) {
       return Response::json($e->getMessage(), 400);
@@ -78,7 +79,7 @@ class Albums extends Controller
 
   /**
    *
-   * Returns path to reorder current album (should be in formModel)
+   * Returns path to reorder current album
    *
    * @return string
    */
