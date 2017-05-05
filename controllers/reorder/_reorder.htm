@@ -1,8 +1,8 @@
 <?php Block::put('breadcrumb') ?>
 <ul>
-    <li><a href="<?= Backend::url('graker/photoalbums/albums') ?>">Albums</a></li>
+    <li><a href="<?= Backend::url('graker/photoalbums/albums') ?>"><?= e(trans('graker.photoalbums::lang.plugin.albums')) ?></a></li>
     <li><a href="<?= Backend::url('graker/photoalbums/albums/update/' . $this->model->id) ?>"><?= e($this->model->title) ?></a></li>
-    <li>Reorder</li>
+    <li><?= e(trans('graker.photoalbums::lang.plugin.reorder')) ?></li>
 </ul>
 <?php Block::endPut() ?>
 
@@ -32,5 +32,5 @@
 
 <?php else: ?>
     <p class="flash-message static error"><?= e($this->fatalError) ?></p>
-    <p><a href="<?= Backend::url('graker/photoalbums/albums') ?>" class="btn btn-default">Return to albums list</a></p>
+    <p><a href="<?= Backend::url('graker/photoalbums/albums') ?>" class="btn btn-default"><?= e(trans('graker.photoalbums::lang.errors.return_to_albums')) ?></a></p>
 <?php endif ?>

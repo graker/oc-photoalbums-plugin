@@ -1,7 +1,7 @@
 <?php Block::put('breadcrumb') ?>
     <ul>
-        <li><a href="<?= Backend::url('graker/photoalbums/albums') ?>">Albums</a></li>
-        <li>Upload multiple photos</li>
+        <li><a href="<?= Backend::url('graker/photoalbums/albums') ?>"><?= e(trans('graker.photoalbums::lang.plugin.albums')) ?></a></li>
+        <li><?= e(trans('graker.photoalbums::lang.plugin.upload_photos_title')) ?></li>
     </ul>
 <?php Block::endPut() ?>
 
@@ -9,13 +9,13 @@
     <?= Form::open(['file' => TRUE, 'class' => 'layout',]) ?>
         <div class="layout-row">
             <div class="form-group">
-                <?= Form::label('album', 'Album to upload to') ?>
+                <?= Form::label('album', e(trans('graker.photoalbums::lang.plugin.album_to_upload')) ) ?>
                 <?= Form::select('album', $this->getAlbumsList()) ?>
             </div>
             <div class="form-group">
                 <div class="field-fileupload" data-url="<?= Backend::url('graker/photoalbums/upload/post_files') ?>">
                     <div class="btn btn-primary dz-message">
-                        Upload photos
+                        <?= e(trans('graker.photoalbums::lang.plugin.upload_photos')) ?>
                     </div>
                 </div>
             </div>
@@ -31,12 +31,12 @@
                     type="submit"
                     data-request="onSave"
                     data-hotkey="ctrl+s, cmd+s"
-                    data-load-indicator="Saving upload..."
+                    data-load-indicator="<?= e(trans('graker.photoalbums::lang.plugin.saving_upload')) ?>"
                     class="btn btn-primary">
-                    Save upload
+                    <?= e(trans('graker.photoalbums::lang.plugin.save_upload')) ?>
                 </button>
                 <span class="btn-text">
-                    or <a href="<?= Backend::url('graker/photoalbums/albums') ?>">Cancel</a>
+                    <?= e(trans('backend::lang.form.or')) ?> <a href="<?= Backend::url('graker/photoalbums/albums') ?>"><?= e(trans('backend::lang.form.cancel')) ?></a>
                 </span>
             </div>
         </div>
@@ -46,6 +46,6 @@
 <?php else: ?>
 
     <p class="flash-message static error"><?= e($this->fatalError) ?></p>
-    <p><a href="<?= Backend::url('graker/photoalbums/albums') ?>" class="btn btn-default">Return to albums list</a></p>
+    <p><a href="<?= Backend::url('graker/photoalbums/albums') ?>" class="btn btn-default"><?= e(trans('graker.photoalbums::lang.errors.return_to_albums')) ?></a></p>
 
 <?php endif ?>

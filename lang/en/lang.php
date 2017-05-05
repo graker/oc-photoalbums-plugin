@@ -30,6 +30,12 @@ return [
     'set_front_button' => 'Set as front',
     'reorder_button' => 'Reorder photos',
     'bool_positive' => 'Yes',
+    'reorder_title' => 'Reorder album :name',
+    'reorder' => 'Reorder',
+    'saving_upload' => 'Saving upload...',
+    'upload_photos_title' => 'Upload multiple photos',
+    'album_to_upload' => 'Album to upload to',
+    'save_upload' => 'Save upload',
   ],
   'errors' => [
     'album_not_found' => 'Album not found!',
@@ -37,10 +43,13 @@ return [
     'not_this_album' => 'Selected photo doesn\'t belong to this album!',
     'return_to_albums' => 'Return to albums list',
     'return_to_photos' => 'Return to photos list',
+    'no_file' => 'No file in request',
+    'invalid_file' => 'File :name is not valid.',
   ],
   'messages' => [
     'set_front' => 'Are you sure to set this photo as front for the album?',
     'delete' => 'Do you really want to delete this album?',
     'delete_photo' => 'Do you really want to delete this photo?',
+    'photos_saved' => 'Photos are saved!',
   ],
 ];

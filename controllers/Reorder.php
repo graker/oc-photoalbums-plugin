@@ -4,6 +4,7 @@ use BackendMenu;
 use Backend\Classes\Controller;
 use Graker\PhotoAlbums\Models\Album;
 use Graker\PhotoAlbums\Models\Photo;
+use Lang;
 
 /**
  * Reorder Back-end Controller
@@ -36,7 +37,7 @@ class Reorder extends Controller
     $this->model = $album;
     $this->addJs('/modules/backend/behaviors/reordercontroller/assets/js/october.reorder.js', 'core');
 
-    $this->pageTitle = 'Reordering album ' . $album->title;
+    $this->pageTitle = Lang::get('graker.photoalbums::lang.plugin.reorder_title', ['name' => $album->title]);
 
     return $this->makePartial('reorder', ['reorderRecords' => $this->model->photos, 'reorderShowTree' => FALSE,]);
   }

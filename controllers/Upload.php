@@ -14,6 +14,7 @@ use Validator;
 use ValidationException;
 use ApplicationException;
 use System\Models\File;
+use Lang;
 
 /**
  * Upload Back-end Controller
@@ -25,7 +26,7 @@ class Upload extends Controller
    * Display the form
    */
   public function form() {
-    $this->pageTitle = 'Upload photos';
+    $this->pageTitle = Lang::get('graker.photoalbums::lang.plugin.upload_photos');
     $this->addJs('/modules/backend/assets/vendor/dropzone/dropzone.js');
     $this->addJs('/plugins/graker/photoalbums/assets/js/upload.js');
     $this->addCss('/plugins/graker/photoalbums/assets/css/dropzone.css');
@@ -39,12 +40,12 @@ class Upload extends Controller
   public function post_files() {
     try {
       if (!Input::hasFile('file')) {
-        throw new ApplicationException('No file in request');
+        throw new ApplicationException(Lang::get('graker.photoalbums::lang.errors.no_file'));
       }
 
       $upload = Input::file('file');
 
-      $validationRules = ['max:'.File::getMaxFilesize()];
+      $validationRules = ['max:' . File::getMaxFilesize()];
 
       $validation = Validator::make(
         ['file' => $upload],
@@ -54,7 +55,7 @@ class Upload extends Controller
         throw new ValidationException($validation);
       }
       if (!$upload->isValid()) {
-        throw new ApplicationException(sprintf('File %s is not valid.', $upload->getClientOriginalName()));
+        throw new ApplicationException(Lang::get('graker.photoalbums::lang.errors.invalid_file', ['name' => $upload->getClientOriginalName()]));
       }
 
       $file = new File;
@@ -77,11 +78,11 @@ class Upload extends Controller
     $album = AlbumModel::find($input['album']);
     if ($album && !empty($input['file-id'])) {
       $this->savePhotos($album, $input['file-id'], $input['file-title']);
-      Flash::success('Photos are saved!');
+      Flash::success(Lang::get('graker.photoalbums::lang.messages.photos_saved'));
       return Redirect::to(Backend::url('graker/photoalbums/albums/update/' . $album->id));
     }
 
-    Flash::error('Album was not found.');
+    Flash::error(Lang::get('graker.photoalbums::lang.errors.album_not_found'));
     return Redirect::to(Backend::url('graker/photoalbums/albums'));
   }
 
