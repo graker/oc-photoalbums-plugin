@@ -5,25 +5,20 @@
 fields:
 
     title:
-        label: Title
+        label: graker.photoalbums::lang.plugin.title_label
         span: left
-        placeholder: Album title
+        placeholder: graker.photoalbums::lang.plugin.title_placeholder_album
 
     slug:
-        label: Slug
+        label: graker.photoalbums::lang.plugin.slug_label
         span: right
-        placeholder: album-title
+        placeholder: graker.photoalbums::lang.plugin.slug_placeholder_album
         preset:
             field: title
             type: slug
 
-#    photos_widget:
-#            label: Photos
-#            type: gallerywidget
-
-
     description:
-        label: Description
+        label: graker.photoalbums::lang.plugin.description_label
         type: richeditor
         size: large
 

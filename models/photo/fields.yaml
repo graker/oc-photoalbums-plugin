@@ -5,24 +5,24 @@
 fields:
 
     title:
-        label: Title
+        label: graker.photoalbums::lang.plugin.title_label
         span: left
-        placeholder: Photo title
+        placeholder: graker.photoalbums::lang.plugin.title_placeholder_photo
 
     image:
-        label: Photo
+        label: graker.photoalbums::lang.plugin.photo
         type: fileupload
         mode: image
         imageWidth: 320
         imageHeight: 240
 
     album:
-        label: Album
+        label: graker.photoalbums::lang.plugin.album
         type: relation
         nameFrom: title
         emptyOption: Not selected
 
     description:
-        label: Description
+        label: graker.photoalbums::lang.plugin.description
         type: richeditor
         size: large

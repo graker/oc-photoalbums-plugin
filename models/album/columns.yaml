@@ -4,13 +4,13 @@
 
 columns:
     title:
-        label: Title
+        label: graker.photoalbums::lang.plugin.title_label
         searchable: true
 
     created_at:
-        label: Created
+        label: graker.photoalbums::lang.plugin.created_label
         type: date
 
     updated_at:
-        label: Updated
+        label: graker.photoalbums::lang.plugin.updated_label
         type: date

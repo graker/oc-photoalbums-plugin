@@ -4,31 +4,31 @@
 
 columns:
     id:
-        label: Photo
+        label: graker.photoalbums::lang.plugin.photo
         type: image
         width: 100
         height: 100
 
     title:
-        label: Title
+        label: graker.photoalbums::lang.plugin.title_label
         searchable: true
 
     front:
-        label: Front
+        label: graker.photoalbums::lang.plugin.front_label
         relation: album
         select: front_id
         type: is_front
 
     album:
-        label: Album
+        label: graker.photoalbums::lang.plugin.album
         valueFrom: title
         searchable: true
         relation: album
 
     created_at:
-        label: Created
+        label: graker.photoalbums::lang.plugin.created_label
         type: date
 
     updated_at:
-        label: Updated
+        label: graker.photoalbums::lang.plugin.updated_label
         type: date
