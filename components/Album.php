@@ -29,8 +29,8 @@ class Album extends ComponentBase
   public function componentDetails()
   {
     return [
-      'name'        => 'Album',
-      'description' => 'Component to output one photo album with all its photos'
+      'name'        => 'graker.photoalbums::lang.plugin.album',
+      'description' => 'graker.photoalbums::lang.components.album_description'
     ];
   }
 
@@ -41,47 +41,47 @@ class Album extends ComponentBase
   {
     return [
       'slug' => [
-        'title'       => 'Slug',
-        'description' => 'URL slug parameter',
+        'title'       => 'graker.photoalbums::lang.plugin.slug_label',
+        'description' => 'graker.photoalbums::lang.plugin.slug_description',
         'default'     => '{{ :slug }}',
         'type'        => 'string'
       ],
       'photoPage' => [
-        'title'       => 'Photo page',
-        'description' => 'Page used to display a single photo',
+        'title'       => 'graker.photoalbums::lang.plugin.photo_page_label',
+        'description' => 'graker.photoalbums::lang.plugin.photo_page_description',
         'type'        => 'dropdown',
         'default'     => 'photoalbums/album/photo',
       ],
       'thumbMode' => [
-        'title'       => 'Thumb mode',
-        'description' => 'Mode of thumb generation',
+        'title'       => 'graker.photoalbums::lang.plugin.thumb_mode_label',
+        'description' => 'graker.photoalbums::lang.plugin.thumb_mode_description',
         'type'        => 'dropdown',
         'default'     => 'auto',
       ],
       'thumbWidth' => [
-        'title'             => 'Thumb width',
-        'description'       => 'Width of the thumb to be generated',
+        'title'             => 'graker.photoalbums::lang.plugin.thumb_width_label',
+        'description'       => 'graker.photoalbums::lang.plugin.thumb_width_description',
         'default'           => 640,
         'type'              => 'string',
-        'validationMessage' => 'Thumb width must be a number',
+        'validationMessage' => 'graker.photoalbums::lang.errors.thumb_width_error',
         'validationPattern' => '^[0-9]+$',
         'required'          => FALSE,
       ],
       'thumbHeight' => [
-        'title'             => 'Thumb height',
-        'description'       => 'Height of the thumb to be generated',
+        'title'             => 'graker.photoalbums::lang.plugin.thumb_height_label',
+        'description'       => 'graker.photoalbums::lang.plugin.thumb_height_description',
         'default'           => 480,
         'type'              => 'string',
-        'validationMessage' => 'Thumb height must be a number',
+        'validationMessage' => 'graker.photoalbums::lang.plugin.errors.thumbs_height_error',
         'validationPattern' => '^[0-9]+$',
         'required'          => FALSE,
       ],
       'photosOnPage' => [
-        'title'             => 'Photos on page',
-        'description'       => 'Amount of photos on one page (to use in pagination)',
+        'title'             => 'graker.photoalbums::lang.plugin.photos_on_page_label',
+        'description'       => 'graker.photoalbums::lang.plugin.photos_on_page_description',
         'default'           => 12,
         'type'              => 'string',
-        'validationMessage' => 'Photos on page value must be a number',
+        'validationMessage' => 'graker.photoalbums::lang.plugin.errors.photos_on_page_error',
         'validationPattern' => '^[0-9]+$',
         'required'          => FALSE,
       ],
