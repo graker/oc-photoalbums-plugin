@@ -5,7 +5,7 @@
             data-handler="onRelationButtonCreate"
             href="javascript:;"
             class="btn btn-sm btn-secondary oc-icon-file">
-        <?= e(trans('backend::lang.relation.create_name', ['name'=>trans($relationLabel)])) ?>
+        <?= e(trans('backend::lang.relation.create_name', ['name' => trans($relationLabel)])) ?>
     </a>
     <?php if ($relationViewMode == 'single'): ?>
     <button
@@ -38,16 +38,16 @@
             })"
             disabled="disabled"
             data-request="onRelationButtonSetFront"
-            data-request-confirm="<?= e('Are you sure to set this photo as front for the album?') ?>"
+            data-request-confirm="<?= e(trans('graker.photoalbums::lang.messages.set_front')) ?>"
             data-trigger-action="enable"
             data-trigger="#<?= $this->relationGetId('view') ?> .control-list input[type=checkbox]"
             data-trigger-condition="checked"
             data-stripe-load-indicator>
-        <?= e('Set as front') ?>
+        <?= e(trans('graker.photoalbums::lang.plugin.set_front_button')) ?>
     </button>
     <a
             href="<?= $this->getReorderPath() ?>"
             class="btn btn-sm btn-secondary oc-icon-refresh">
-        Reorder photos
+        <?= e(trans('graker.photoalbums::lang.plugin.reorder_button')) ?>
     </a>
 </div>

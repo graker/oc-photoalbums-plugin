@@ -9,7 +9,7 @@ list: $/graker/photoalbums/models/album/columns.yaml
 modelClass: Graker\Photoalbums\Models\Album
 
 # List Title
-title: Manage Albums
+title: graker.photoalbums::lang.plugin.list_title
 
 # Link URL for each record
 recordUrl: graker/photoalbums/albums/update/:id

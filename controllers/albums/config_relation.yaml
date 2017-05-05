@@ -3,7 +3,7 @@
 # ===================================
 
 photos:
-    label: Photo
+    label: graker.photoalbums::lang.plugin.photo
     manage:
         form: $/graker/photoalbums/models/photo/fields.yaml
         list: $/graker/photoalbums/models/photo/columns.yaml
