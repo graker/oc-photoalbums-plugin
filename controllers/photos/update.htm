@@ -1,6 +1,6 @@
 <?php Block::put('breadcrumb') ?>
     <ul>
-        <li><a href="<?= Backend::url('graker/photoalbums/photos') ?>">Photos</a></li>
+        <li><a href="<?= Backend::url('graker/photoalbums/photos') ?>"><?= e(trans('graker.photoalbums::lang.plugin.photos')) ?></a></li>
         <li><?= e($this->pageTitle) ?></li>
     </ul>
 <?php Block::endPut() ?>
@@ -20,28 +20,28 @@
                     data-request="onSave"
                     data-request-data="redirect:0"
                     data-hotkey="ctrl+s, cmd+s"
-                    data-load-indicator="Saving Photo..."
+                    data-load-indicator="<?= e(trans('graker.photoalbums::lang.plugin.saving_photo')) ?>"
                     class="btn btn-primary">
-                    <u>S</u>ave
+                    <?= e(trans('backend::lang.form.save')) ?>
                 </button>
                 <button
                     type="button"
                     data-request="onSave"
                     data-request-data="close:1"
                     data-hotkey="ctrl+enter, cmd+enter"
-                    data-load-indicator="Saving Photo..."
+                    data-load-indicator="<?= e(trans('graker.photoalbums::lang.plugin.saving_photo')) ?>"
                     class="btn btn-default">
-                    Save and Close
+                    <?= e(trans('backend::lang.form.save_and_close')) ?>
                 </button>
                 <button
                     type="button"
                     class="oc-icon-trash-o btn-icon danger pull-right"
                     data-request="onDelete"
-                    data-load-indicator="Deleting Photo..."
-                    data-request-confirm="Do you really want to delete this photo?">
+                    data-load-indicator="<?= e(trans('graker.photoalbums::lang.plugin.deleting_photo')) ?>"
+                    data-request-confirm="<?= e(trans('graker.photoalbums::lang.messages.delete_photo')) ?>">
                 </button>
                 <span class="btn-text">
-                    or <a href="<?= Backend::url('graker/photoalbums/photos') ?>">Cancel</a>
+                    <?= e(trans('backend::lang.form.or')) ?> <a href="<?= Backend::url('graker/photoalbums/photos') ?>"><?= e(trans('backend::lang.form.cancel')) ?></a>
                 </span>
             </div>
         </div>
@@ -51,6 +51,6 @@
 <?php else: ?>
 
     <p class="flash-message static error"><?= e($this->fatalError) ?></p>
-    <p><a href="<?= Backend::url('graker/photoalbums/photos') ?>" class="btn btn-default">Return to photos list</a></p>
+    <p><a href="<?= Backend::url('graker/photoalbums/photos') ?>" class="btn btn-default"><?= e(trans('graker.photoalbums::lang.errors.return_to_photos')) ?></a></p>
 
 <?php endif ?>

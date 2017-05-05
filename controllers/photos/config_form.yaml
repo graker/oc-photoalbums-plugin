@@ -3,7 +3,7 @@
 # ===================================
 
 # Record name
-name: Photo
+name: graker.photoalbums::lang.plugin.photo
 
 # Model Form Field configuration
 form: $/graker/photoalbums/models/photo/fields.yaml
@@ -16,16 +16,16 @@ defaultRedirect: graker/photoalbums/photos
 
 # Create page
 create:
-    title: Create Photo
+    title: graker.photoalbums::lang.plugin.create_photo
     redirect: graker/photoalbums/photos/update/:id
     redirectClose: graker/photoalbums/photos
 
 # Update page
 update:
-    title: Edit Photo
+    title: graker.photoalbums::lang.plugin.edit_photo
     redirect: graker/photoalbums/photos
     redirectClose: graker/photoalbums/photos
 
 # Preview page
 preview:
-    title: Preview Photo
+    title: graker.photoalbums::lang.plugin.preview_photo
