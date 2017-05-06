@@ -6,20 +6,20 @@ use October\Rain\Database\Updates\Migration;
 class AddAlbumFront extends Migration
 {
 
-  public function up()
-  {
-    Schema::table('graker_photoalbums_albums', function($table)
+    public function up()
     {
-      $table->integer('front_id')->unsigned()->nullable();
-    });
-  }
+        Schema::table('graker_photoalbums_albums', function($table)
+        {
+            $table->integer('front_id')->unsigned()->nullable();
+        });
+    }
 
-  public function down()
-  {
-    Schema::table('graker_photoalbums_albums', function($table)
+    public function down()
     {
-      $table->dropColumn('front_id');
-    });
-  }
+        Schema::table('graker_photoalbums_albums', function($table)
+        {
+            $table->dropColumn('front_id');
+        });
+    }
 
 }
