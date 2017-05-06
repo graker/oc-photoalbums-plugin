@@ -39,7 +39,7 @@ class Reorder extends Controller
 
     $this->pageTitle = Lang::get('graker.photoalbums::lang.plugin.reorder_title', ['name' => $album->title]);
 
-    return $this->makePartial('reorder', ['reorderRecords' => $this->model->photos, 'reorderShowTree' => FALSE,]);
+    return $this->makePartial('reorder', ['reorderRecords' => $this->model->photos,]);
   }
 
 

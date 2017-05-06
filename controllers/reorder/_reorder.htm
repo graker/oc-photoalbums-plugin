@@ -13,8 +13,8 @@
         id="reorderTreeList"
         class="control-treelist"
         data-control="treelist"
-        <?= $reorderShowTree ? '' : 'data-nested="0"' ?>
-        data-handle="<?= $reorderShowTree ? 'a.move' : '> li > .record > a.move' ?>"
+        data-nested="0"
+        data-handle="> li > .record > a.move"
         data-stripe-load-indicator>
             <?php if ($reorderRecords): ?>
             <ol id="reorderRecords">
