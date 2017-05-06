@@ -68,7 +68,7 @@ For example:
 The placeholder will be replaced with path to image (or thumb), for example: `/storage/app/uploads/public/57a/24e/bff/thumb_301_640x480_0_0_auto.jpg`.
 
 Note that to avoid possible conflicts, placeholders are only replaced inside `src=""` and `href=""` clauses. 
-So if you add placeholder in href for anchor tag or in src for img tag, it will be replaced. And if you add it into plain text, it will be ignored.
+So if you add placeholder in href for anchor tag or in src for img tag (or into Markdown link or image), it will be replaced. And if you add it into plain text, it will be ignored.
 
 ## Roadmap
 
