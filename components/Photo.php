@@ -12,8 +12,8 @@ class Photo extends ComponentBase
   public function componentDetails()
   {
     return [
-      'name'        => 'Photo',
-      'description' => 'Single photo component'
+      'name'        => 'graker.photoalbums::lang.plugin.photo',
+      'description' => 'graker.photoalbums::lang.components.photo_description'
     ];
   }
 
@@ -27,20 +27,20 @@ class Photo extends ComponentBase
   {
     return [
       'id' => [
-        'title'       => 'ID',
-        'description' => 'URL id parameter',
+        'title'       => 'graker.photoalbums::lang.components.id_label',
+        'description' => 'graker.photoalbums::lang.components.id_description',
         'default'     => '{{ :id }}',
         'type'        => 'string'
       ],
       'albumPage' => [
-        'title'       => 'Album page',
-        'description' => 'Page used to display photo albums',
+        'title'       => 'graker.photoalbums::lang.components.album_page_label',
+        'description' => 'graker.photoalbums::lang.components.album_page_description',
         'type'        => 'dropdown',
         'default'     => 'photoalbums/album',
       ],
       'photoPage' => [
-        'title'       => 'Photo page',
-        'description' => 'Page used to display single photo',
+        'title'       => 'graker.photoalbums::lang.components.photo_page_label',
+        'description' => 'graker.photoalbums::lang.components.photo_page_description',
         'type'        => 'dropdown',
         'default'     => 'photoalbums/album/photo',
       ],

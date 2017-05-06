@@ -59,6 +59,8 @@ return [
     'thumb_height_error' => 'Thumb height must be a number',
     'photos_on_page_error' => 'Photos on page value must be a number',
     'albums_on_page_error' => 'Albums on page value must be a number',
+    'photos_count_error' => 'Photos count must be a number',
+    'cache_lifetime_error' => 'Cache lifetime must be a number',
   ],
   'messages' => [
     'set_front' => 'Are you sure to set this photo as front for the album?',
@@ -67,6 +69,7 @@ return [
     'photos_saved' => 'Photos are saved!',
   ],
   'components' => [
+    'photo_description' => 'Single photo component',
     'album_description' => 'Component to output one photo album with all its photos.',
     'photo_page_label' => 'Photo page',
     'photo_page_description' => 'Page used to display a single photo',
@@ -84,5 +87,13 @@ return [
     'albums_list_description' => 'Lists all photo albums on site',
     'album_page_label' => 'Album page',
     'album_page_description' => 'Page used to display photo albums',
+    'id_label' => 'ID',
+    'id_description' => 'Photo id parameter',
+    'random_photos' => 'Random Photos',
+    'random_photos_description' => 'Output predefined number of random photos',
+    'photos_count_label' => 'Photos to output',
+    'photos_count_description' => 'Amount of random photos to output',
+    'cache_lifetime_label' => 'Cache lifetime',
+    'cache_lifetime_description' => 'Number of minutes selected photos are stored in cache. 0 for no caching.',
   ],
 ];
