@@ -14,7 +14,6 @@ class CreatePhotosTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned()->nullable()->index();
             $table->integer('album_id')->unsigned()->nullable()->index();
-            $table->integer('sort_order')->unsigned()->nullable();
             $table->string('title')->nullable();
             $table->text('description')->nullable();
             $table->timestamps();

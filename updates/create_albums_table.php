@@ -13,7 +13,6 @@ class CreateAlbumsTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->integer('user_id')->unsigned()->nullable()->index();
-            $table->integer('front_id')->unsigned()->nullable();
             $table->string('title')->nullable();
             $table->string('slug')->index();
             $table->text('description')->nullable();
