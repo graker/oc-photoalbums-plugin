@@ -38,7 +38,7 @@ If no photo is selected is front, the latest uploaded photo will be used for thu
 
 ### Random Photos
 
-Displays given number of random photos. Note that for big database tables, selects with random sorting can slow down your site, so use the component with caution and make use of cache lifetime to avoid running the query on each component show. Also note that due to the use of RAND() function for sorting, the component would work with MySQL database only. To use the component with other databases, you'd need to rewrite orderBy() call. And apparently there's no general DB-independent method in Laravel to do random sorting.
+Displays given number of random photos. Note that for big database tables, selects with random sorting can slow down your site, so use the component with caution and make use of cache lifetime to avoid running the query on each component show. Also note that due to the use of RAND() function for sorting, the component would work with MySQL and Sqlite databases only. To use the component with other databases, you'd need to rewrite orderBy() call, otherwise it will just return non-random collection. After October updates to Laravel 5.5, DB-independent function will be used.
 
 ## Uploading
 
