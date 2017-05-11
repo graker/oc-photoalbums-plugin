@@ -12,3 +12,5 @@
 1.2.1:
     - Fill default sort_order values for existing photos
     - update_sort_order_on_existing_photos.php
+1.2.2:
+    - Sqlite support for RandomPhotos component
