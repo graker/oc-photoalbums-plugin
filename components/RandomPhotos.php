@@ -125,15 +125,20 @@ class RandomPhotos extends ComponentBase
     /**
      *
      * Returns a collection of random photos
+     * Works for MySQL and Sqlite, for other drivers returns non-random selection
      *
      * @return Collection
      */
     protected function getPhotos() {
         $count = $this->property('photosCount');
-        $photos = PhotoModel::orderBy(DB::raw('RAND()'))
-          ->with('image')
-          ->take($count)
-          ->get();
+        if (DB::connection()->getDriverName() == 'mysql') {
+            $photos = PhotoModel::orderBy(DB::raw('RAND()'));
+        } else if (DB::connection()->getDriverName() == 'sqlite') {
+            $photos = PhotoModel::orderBy(DB::raw('RANDOM()'));
+        } else {
+            $photos = PhotoModel::orderBy('id');
+        }
+        $photos = $photos->with('image')->take($count)->get();
 
         foreach ($photos as $photo) {
             $photo->url = $photo->setUrl($this->property('photoPage'), $this->controller);
