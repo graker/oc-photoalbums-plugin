@@ -5,6 +5,7 @@ namespace Graker\PhotoAlbums\Tests;
 use PluginTestCase;
 use Graker\PhotoAlbums\Components\RandomPhotos;
 use Graker\PhotoAlbums\Models\Photo;
+use Graker\PhotoAlbums\Models\Album;
 use Cms\Classes\ComponentManager;
 use Cms\Classes\Page;
 use Cms\Classes\Layout;
@@ -20,14 +21,15 @@ class RandomPhotosTest extends PluginTestCase {
      * Tests that random photos are generated
      */
     public function testRandomPhotos() {
-        // create 7 photos
-        $photos[] = $this->createPhoto();
-        $photos[] = $this->createPhoto();
-        $photos[] = $this->createPhoto();
-        $photos[] = $this->createPhoto();
-        $photos[] = $this->createPhoto();
-        $photos[] = $this->createPhoto();
-        $photos[] = $this->createPhoto();
+        // create album and 7 photos
+        $album = $this->createAlbum();
+        $photos[] = $this->createPhoto($album);
+        $photos[] = $this->createPhoto($album);
+        $photos[] = $this->createPhoto($album);
+        $photos[] = $this->createPhoto($album);
+        $photos[] = $this->createPhoto($album);
+        $photos[] = $this->createPhoto($album);
+        $photos[] = $this->createPhoto($album);
 
         // get random photos
         $component = $this->createRandomPhotosComponent();
@@ -55,16 +57,35 @@ class RandomPhotosTest extends PluginTestCase {
 
     /**
      *
-     * Creates photo model
+     * Creates album model
      *
+     * @return \Graker\PhotoAlbums\Models\Album
+     */
+    protected function createAlbum() {
+        $faker = Faker\Factory::create();
+        $album = new Album();
+        $album->title = $faker->sentence(3);
+        $album->slug = str_slug($album->title);
+        $album->description = $faker->text();
+        $album->save();
+        return $album;
+    }
+
+
+    /**
+     *
+     * Creates photo model and put it into album
+     *
+     * @param \Graker\PhotoAlbums\Models\Album $album
      * @return \Graker\PhotoAlbums\Models\Photo
      */
-    protected function createPhoto() {
+    protected function createPhoto(Album $album) {
         $faker = Faker\Factory::create();
         $photo = new Photo();
         $photo->title = $faker->sentence(3);
         $photo->description = $faker->text();
         $photo->image = $faker->image();
+        $photo->album = $album;
         $photo->save();
         return $photo;
     }
