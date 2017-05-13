@@ -14,3 +14,5 @@
     - update_sort_order_on_existing_photos.php
 1.2.2:
     - Sqlite support for RandomPhotos component
+1.2.3:
+    - Added helper method to get album's cover photo

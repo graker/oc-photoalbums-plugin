@@ -1,6 +1,7 @@
 <?php namespace Graker\PhotoAlbums\Models;
 
 use Model;
+use System\Models\File;
 
 /**
  * Album Model
@@ -74,6 +75,25 @@ class Album extends Model
         $related = $this->getRelation('photosCount');
 
         return ($related) ? (int) $related->aggregate : 0;
+    }
+
+
+    /**
+     *
+     * Returns image file of photo set as album front or image in the latest photo of the album
+     *
+     * @return File
+     */
+    public function getImage() {
+        if (isset($this->front->image)) {
+            return $this->front->image;
+        }
+
+        if (isset($this->latestPhoto->image)) {
+            return $this->latestPhoto->image;
+        }
+
+        return NULL;
     }
 
 
