@@ -85,11 +85,11 @@ class Album extends Model
      * @return File
      */
     public function getImage() {
-        if (isset($this->front->image)) {
+        if ($this->front) {
             return $this->front->image;
         }
 
-        if (isset($this->latestPhoto->image)) {
+        if ($this->latestPhoto) {
             return $this->latestPhoto->image;
         }
 

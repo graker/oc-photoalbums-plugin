@@ -16,3 +16,5 @@
     - Sqlite support for RandomPhotos component
 1.2.3:
     - Added helper method to get album's cover photo
+1.2.4:
+    - Fix for album front photo eager loading
