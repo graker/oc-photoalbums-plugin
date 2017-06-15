@@ -57,6 +57,7 @@ class Album extends Model
     public function photosCount() {
         return $this->hasOne('Graker\PhotoAlbums\Models\Photo')
           ->selectRaw('album_id, count(*) as aggregate')
+          ->orderBy('album_id')
           ->groupBy('album_id');
     }
 

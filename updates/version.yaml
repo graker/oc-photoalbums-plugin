@@ -18,3 +18,5 @@
     - Added helper method to get album's cover photo
 1.2.4:
     - Fix for album front photo eager loading
+1.2.5:
+    - Fix for photos count in only_full_group_by sql mode
