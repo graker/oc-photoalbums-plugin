@@ -1,0 +1,16 @@
+<div id="albumsList" class="row">
+    <?php foreach ($albums as $album) : ?>
+        <div class="col-xs-12 col-sm-4">
+            <p class="text-center">
+                <a href="javascript: ;" class="album-link" data-request-data="<?= $album->id ?>">
+                    <img src="<?= $album->thumb; ?>" />
+                </a>
+            </p>
+            <p class="text-center">
+                <a href="javascript: ;" class="album-link" data-request-data="<?= $album->id ?>">
+                    <?= $album->title; ?>
+                </a>
+            </p>
+        </div>
+    <?php endforeach; ?>
+</div>

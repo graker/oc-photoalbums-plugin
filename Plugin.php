@@ -3,7 +3,9 @@
 use Backend;
 use System\Classes\PluginBase;
 use Event;
+use Backend\Widgets\Form;
 use Lang;
+use Graker\PhotoAlbums\Widgets\PhotoSelector;
 
 /**
  * PhotoAlbums Plugin Information File
@@ -165,9 +167,36 @@ class Plugin extends PluginBase
     /**
      * boot() implementation
      *  - Register listener to markdown.parse
+     *  - Add button to blog post form to insert photos from albums
      */
     public function boot() {
         Event::listen('markdown.parse', 'Graker\PhotoAlbums\Classes\MarkdownPhotoInsert@parse');
+        $this->extendBlogPostForm();
+    }
+
+
+    /**
+     * Extends Blog post form by adding a new button: Insert photo from albums
+     */
+    protected function extendBlogPostForm() {
+        Event::listen('backend.form.extendFields', function (Form $widget) {
+            // attach to post forms only
+            $controller = $widget->getController();
+            if (!($controller instanceof \RainLab\Blog\Controllers\Posts)) {
+                return ;
+            }
+            if (!($widget->model instanceof \RainLab\Blog\Models\Post)) {
+                return ;
+            }
+
+            // add PhotoSelector widget to Post controller
+            $photo_selector = new PhotoSelector($controller);
+            $photo_selector->alias = 'photoSelector';
+            $photo_selector->bindToController();
+
+            // add javascript extending Markdown editor with new button
+            $widget->addJs('/plugins/graker/photoalbums/assets/js/extend-markdown-editor.js');
+        });
     }
 
 }

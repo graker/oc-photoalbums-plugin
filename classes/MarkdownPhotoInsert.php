@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: graker
- * Date: 17.09.16
- * Time: 20:37
- */
 
 namespace Graker\PhotoAlbums\Classes;
 

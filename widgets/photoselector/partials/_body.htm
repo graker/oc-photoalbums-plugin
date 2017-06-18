@@ -1,0 +1,16 @@
+<div class="modal-lg modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4>Selecting photo</h4>
+        </div>
+        <div class="modal-body">
+            <?php if ($albums) : ?>
+                <?= $this->makePartial('albums-list') ?>
+            <?php else : ?>
+                <p>You don't have any albums yet.</p>
+            <?php endif; ?>
+        </div>
+        <div class="modal-footer">Footer</div>
+    </div>
+</div>

@@ -1,0 +1,20 @@
+<div id="photosList" class="row">
+    <?php foreach ($photos as $photo) : ?>
+    <div class="col-xs-12 col-sm-4">
+        <p class="text-center">
+            <a href="javascript: ;" class="photo-link" data-request-data="<?= $photo->id ?>">
+                <img src="<?= $photo->thumb; ?>" />
+            </a>
+        </p>
+        <p class="text-center">
+            <a href="javascript: ;" class="photo-link" data-request-data="<?= $photo->id ?>">
+                <?php if ($photo->title) : ?>
+                    <?= $photo->title; ?>
+                <?php else: ?>
+                    &nbsp;
+                <?php endif; ?>
+            </a>
+        </p>
+    </div>
+    <?php endforeach; ?>
+</div>
