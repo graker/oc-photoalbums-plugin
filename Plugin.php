@@ -57,6 +57,10 @@ class Plugin extends PluginBase
             'label' => 'graker.photoalbums::lang.plugin.manage_albums',
             'tab' => 'graker.photoalbums::lang.plugin.tab',
           ],
+          'graker.photoalbums.access_settings' => [
+            'label' => 'graker.photoalbums::lang.plugin.access_permission',
+            'tab' => 'graker.photoalbums::lang.plugin.tab',
+          ],
         ];
     }
 
@@ -108,6 +112,27 @@ class Plugin extends PluginBase
               ],
             ],
           ],
+        ];
+    }
+
+
+    /**
+     *
+     * Registers plugin's settings
+     *
+     * @return array
+     */
+    public function registerSettings()
+    {
+        return [
+          'settings' => [
+            'label'       => 'graker.photoalbums::lang.plugin.name',
+            'description' => 'graker.photoalbums::lang.plugin.settings_description',
+            'icon'        => 'icon-camera-retro',
+            'class'       => 'Graker\PhotoAlbums\Models\Settings',
+            'order'       => 100,
+            'permissions' => ['graker.photoalbums.access_settings'],
+          ]
         ];
     }
 

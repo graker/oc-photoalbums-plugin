@@ -4,8 +4,10 @@ return [
   'plugin' => [
     'name' => 'Photo Albums',
     'description' => 'Create, display and manage galleries of photos arranged in albums.',
+    'settings_description' => 'Photo Albums plugin settings',
     'tab' => 'Photo Albums',
     'manage_albums' => 'Manage photo albums',
+    'access_permission' => 'Access Settings',
     'upload_photos' => 'Upload photos',
     'new_album' => 'New album',
     'create_album' => 'Create album',
@@ -46,6 +48,8 @@ return [
     'slug_placeholder_album' => 'album-title',
     'description_label' => 'Description',
     'front_label' => 'Front',
+    'code_label' => 'Code',
+    'code_description' => 'Type in default markdown to use for photo insert. There are two placeholders: %id% and %title%, they will be replaced with photo id and photo title automatically.',
   ],
   'errors' => [
     'album_not_found' => 'Album not found!',

@@ -1,0 +1,10 @@
+# ===================================
+#  Field Definitions
+# ===================================
+
+fields:
+
+    code:
+      label: graker.photoalbums::lang.plugin.code_label
+      comment: graker.photoalbums::lang.plugin.code_description
+      default: '![%title%]([photo:%id%])'

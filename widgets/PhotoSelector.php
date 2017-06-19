@@ -5,6 +5,7 @@ namespace Graker\PhotoAlbums\Widgets;
 use Backend\Classes\WidgetBase;
 use Graker\PhotoAlbums\Models\Album;
 use Graker\PhotoAlbums\Models\Photo;
+use Graker\PhotoAlbums\Models\Settings;
 use Illuminate\Support\Collection;
 
 /**
@@ -17,8 +18,8 @@ use Illuminate\Support\Collection;
 class PhotoSelector extends WidgetBase {
 
     // TODO add spinners for waiting
+    // TODO implement insert with doubleclick
     // TODO try to remember last position so user won't be selecting the same album over and over again
-    // TODO create plugin settings to store default markdown to be inserted
     // TODO localize partials
 
     /**
@@ -70,7 +71,7 @@ class PhotoSelector extends WidgetBase {
         $this->vars['albums'] = $this->albums();
 
         return [
-            '#photosList' => $this->makePartial('albums'),
+          '#photosList' => $this->makePartial('albums'),
         ];
     }
 
@@ -89,7 +90,7 @@ class PhotoSelector extends WidgetBase {
         $this->vars['photos'] = $album->photos;
 
         return [
-            '#albumsList' => $this->makePartial('photos'),
+          '#albumsList' => $this->makePartial('photos'),
         ];
     }
 
@@ -101,7 +102,6 @@ class PhotoSelector extends WidgetBase {
      * @return Collection
      */
     protected function albums() {
-        // TODO duplicate (almost) code here and in albumlist component, refactor?
         $albums = Album::orderBy('created_at', 'desc')
           ->has('photos')
           ->with(['latestPhoto' => function ($query) {
@@ -138,8 +138,7 @@ class PhotoSelector extends WidgetBase {
           ->with(['photos' => function ($query) {
               $query->orderBy('sort_order', 'desc');
               $query->with('image');
-              // TODO add pagination
-              // $query->paginate($this->property('photosOnPage'), $this->currentPage);
+              // TODO add pagination (with respect to settings)
           }])
           ->first();
 
@@ -163,14 +162,19 @@ class PhotoSelector extends WidgetBase {
 
     /**
      *
-     * Create an insert code for photo
+     * Create an insert markdown code for photo from plugin settings
      *
      * @param Photo $photo
      * @return string
      */
     protected function createPhotoCode($photo) {
-        // TODO take code from settings
-        return '![1]([photo:' . $photo->id . '])';
+        $code_template = Settings::get('code', '![%title%]([photo:%id%])');
+        $code = str_replace(
+          array('%id%', '%title%'),
+          array($photo->id, $photo->title),
+          $code_template
+        );
+        return $code;
     }
 
 }
