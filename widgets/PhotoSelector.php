@@ -18,7 +18,6 @@ use Illuminate\Support\Collection;
 class PhotoSelector extends WidgetBase {
 
     // TODO add spinners for waiting
-    // TODO implement insert with doubleclick
     // TODO try to remember last position so user won't be selecting the same album over and over again
     // TODO localize partials
 

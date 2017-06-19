@@ -65,8 +65,9 @@
             update: {photos: '#albumsList'},
             success: function (data) {
                 this.success(data);
-                // bind photo link clicks event
+                // bind photo link click and double click events
                 $('#photosList').find('a.photo-link').click(selector.proxy(selector.onPhotoSelected));
+                $('#photosList').find('a.photo-link').dblclick(selector.proxy(selector.onPhotoDoubleClicked));
                 // bind back to albums click event
                 $('#photosList').find('a.back-to-albums').one('click', selector.proxy(selector.onBackToAlbums));
             }
@@ -121,6 +122,20 @@
             var code = selected.data('request-data');
             this.options.onInsert.call(this, code);
         }
+    };
+
+
+    /**
+     *
+     * Double click callback
+     *
+     * @param event
+     */
+    PhotoSelector.prototype.onPhotoDoubleClicked = function (event) {
+        // select the photo and insert it
+        var link = $(event.currentTarget);
+        link.trigger('click');
+        $('div.photo-selection-dialog').find('button.btn-insert').trigger('click');
     };
 
 
