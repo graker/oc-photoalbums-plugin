@@ -1,4 +1,5 @@
 <div id="photosList" class="row">
+    <h4 class="text-center"><?= $album_title; ?></h4>
     <?php foreach ($photos as $photo) : ?>
     <div class="col-xs-12 col-sm-4">
         <p class="text-center">
@@ -17,4 +18,7 @@
         </p>
     </div>
     <?php endforeach; ?>
+    <div class="col-xs-11 text-right">
+        <a href="javascript: ;" class="back-to-albums">Back to albums</a>
+    </div>
 </div>

@@ -16,6 +16,14 @@ use Illuminate\Support\Collection;
  */
 class PhotoSelector extends WidgetBase {
 
+    // TODO implement photo selection
+    // TODO add footer buttons
+    // TODO add spinners for waiting
+    // TODO implement insert
+    // TODO try to remember last position so user won't be selecting the same album over and over again
+    // TODO we probably could add markdown to each photo right here
+    // TODO create plugin settings to store default markdown to be inserted
+
     /**
      * @var string unique widget alias
      */
@@ -45,12 +53,27 @@ class PhotoSelector extends WidgetBase {
 
     /**
      *
-     * Callback for when the dialog is open
+     * Callback for when the dialog is initially open
      *
      * @return string
      */
     public function onDialogOpen() {
         return $this->render();
+    }
+
+
+    /**
+     *
+     * Callback to generate albums list
+     *
+     * @return array
+     */
+    public function onAlbumListLoad() {
+        $this->vars['albums'] = $this->albums();
+
+        return [
+            '#photosList' => $this->makePartial('albums'),
+        ];
     }
 
 
@@ -63,8 +86,9 @@ class PhotoSelector extends WidgetBase {
      */
     public function onAlbumLoad() {
         $album_id = input('id');
-        $this->vars['id'] = $album_id;
-        $this->vars['photos'] = $this->photos($album_id);
+        $album = $this->album($album_id);
+        $this->vars['album_title'] = $album->title;
+        $this->vars['photos'] = $album->photos;
 
         return [
             '#albumsList' => $this->makePartial('photos'),
@@ -106,25 +130,33 @@ class PhotoSelector extends WidgetBase {
 
     /**
      *
-     * Returns a collection of album photos
+     * Returns album with its photos loaded and prepared for display in dialog
      *
      * @param int $album_id
-     * @return Collection
+     * @return Album
      */
-    protected function photos($album_id) {
-        $photos = Photo::where('album_id', $album_id)
-          ->with('image')
-          ->get();
+    protected function album($album_id) {
+        $album = Album::where('id', $album_id)
+          ->with(['photos' => function ($query) {
+              $query->orderBy('sort_order', 'desc');
+              $query->with('image');
+              // TODO add pagination
+              // $query->paginate($this->property('photosOnPage'), $this->currentPage);
+          }])
+          ->first();
 
-        foreach ($photos as $photo) {
-            $photo->thumb = $photo->image->getThumb(
-              160,
-              120,
-              ['mode' => 'crop']
-            );
+        if ($album) {
+            //prepare photo urls and thumbs
+            foreach ($album->photos as $photo) {
+                $photo->thumb = $photo->image->getThumb(
+                  160,
+                  120,
+                  ['mode' => 'crop']
+                );
+            }
         }
 
-        return $photos;
+        return $album;
     }
 
 }

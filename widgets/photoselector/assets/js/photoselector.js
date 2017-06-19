@@ -52,14 +52,40 @@
 
 
     /**
-     * Album clicked processor
+     * Album clicked callback
      * @param event
      */
     PhotoSelector.prototype.onAlbumClicked = function (event) {
         var link_id = $(event.currentTarget).data('request-data');
+        var selector = this;
         $.request('onAlbumLoad', {
             data: {id: link_id},
-            update: {photos: '#albumsList'}
+            update: {photos: '#albumsList'},
+            success: function (data) {
+                this.success(data);
+                // TODO bind photo link clicks event
+
+                // bind back to albums click event
+                $('#photosList').find('a.back-to-albums').one('click', selector.proxy(selector.onBackToAlbums));
+            }
+        });
+    };
+
+
+    /**
+     *
+     * Back to albums clicked callback
+     *
+     * @param event
+     */
+    PhotoSelector.prototype.onBackToAlbums = function (event) {
+        var selector = this;
+        $.request('onAlbumListLoad', {
+           'update': { albums: '#photosList'},
+            success: function (data) {
+                this.success(data);
+                $('#albumsList').find('.album-link').one('click', selector.proxy(selector.onAlbumClicked));
+            }
         });
     };
 
