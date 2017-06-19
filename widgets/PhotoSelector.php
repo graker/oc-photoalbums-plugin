@@ -16,7 +16,6 @@ use Illuminate\Support\Collection;
  */
 class PhotoSelector extends WidgetBase {
 
-    // TODO implement photo selection
     // TODO add footer buttons
     // TODO add spinners for waiting
     // TODO implement insert
@@ -48,6 +47,7 @@ class PhotoSelector extends WidgetBase {
      */
     protected function loadAssets() {
         $this->addJs('js/photoselector.js');
+        $this->addCss('css/photoselector.css');
     }
 
 

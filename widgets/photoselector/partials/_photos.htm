@@ -2,20 +2,22 @@
     <h4 class="text-center"><?= $album_title; ?></h4>
     <?php foreach ($photos as $photo) : ?>
     <div class="col-xs-12 col-sm-4">
-        <p class="text-center">
-            <a href="javascript: ;" class="photo-link" data-request-data="<?= $photo->id ?>">
-                <img src="<?= $photo->thumb; ?>" />
-            </a>
-        </p>
-        <p class="text-center">
-            <a href="javascript: ;" class="photo-link" data-request-data="<?= $photo->id ?>">
-                <?php if ($photo->title) : ?>
-                    <?= $photo->title; ?>
-                <?php else: ?>
-                    &nbsp;
-                <?php endif; ?>
-            </a>
-        </p>
+        <div class="photo-links-wrapper">
+            <p class="text-center">
+                <a href="javascript: ;" class="photo-link image-link" data-request-data="<?= $photo->id ?>">
+                    <img src="<?= $photo->thumb; ?>" />
+                </a>
+            </p>
+            <p class="text-center">
+                <a href="javascript: ;" class="photo-link title-link" data-request-data="<?= $photo->id ?>">
+                    <?php if ($photo->title) : ?>
+                        <?= $photo->title; ?>
+                    <?php else: ?>
+                        &nbsp;
+                    <?php endif; ?>
+                </a>
+            </p>
+        </div>
     </div>
     <?php endforeach; ?>
     <div class="col-xs-11 text-right">

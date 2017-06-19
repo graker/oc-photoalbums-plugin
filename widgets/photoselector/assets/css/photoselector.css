@@ -1,0 +1,14 @@
+#photosList .photo-link.image-link {
+    display: inline-block;
+    padding: 7px;
+}
+
+#photosList .photo-link.image-link.selected {
+    border: 1px solid;
+    padding: 6px;
+    border-radius: 6px;
+}
+
+#photosList .photo-link.title-link.selected {
+    font-weight: bold;
+}

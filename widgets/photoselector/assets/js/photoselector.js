@@ -63,12 +63,28 @@
             update: {photos: '#albumsList'},
             success: function (data) {
                 this.success(data);
-                // TODO bind photo link clicks event
-
+                // bind photo link clicks event
+                $('#photosList').find('a.photo-link').click(selector.proxy(selector.onPhotoSelected));
                 // bind back to albums click event
                 $('#photosList').find('a.back-to-albums').one('click', selector.proxy(selector.onBackToAlbums));
             }
         });
+    };
+
+
+    /**
+     *
+     * Photo clicked callback
+     *
+     * @param event
+     */
+    PhotoSelector.prototype.onPhotoSelected = function (event) {
+        // remove old selected classes
+        $('#photosList').find('a.selected').removeClass('selected');
+
+        // add new selected classes
+        var wrapper = $(event.currentTarget).parents('.photo-links-wrapper');
+        wrapper.find('a.photo-link').addClass('selected');
     };
 
 
