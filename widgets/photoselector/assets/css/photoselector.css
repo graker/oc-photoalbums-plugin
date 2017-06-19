@@ -12,3 +12,9 @@
 #photosList .photo-link.title-link.selected {
     font-weight: bold;
 }
+
+#photosList .back-to-albums {
+    margin-top: 16px;
+    margin-bottom: 16px;
+    display: block;
+}
