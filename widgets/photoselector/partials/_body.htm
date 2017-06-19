@@ -2,18 +2,18 @@
     <div class="modal-content">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4>Selecting photo</h4>
+            <h4><?= e(trans('graker.photoalbums::lang.plugin.selecting_photo')) ?></h4>
         </div>
         <div class="modal-body">
             <?php if ($albums) : ?>
                 <?= $this->makePartial('albums') ?>
             <?php else : ?>
-                <p>You don't have any albums yet.</p>
+                <p><?= e(trans('graker.photoalbums::lang.errors.no_albums')) ?></p>
             <?php endif; ?>
         </div>
         <div class="modal-footer">
-            <button class="btn btn-primary btn-insert">Insert</button>
-            <button class="btn btn-default btn-cancel" data-dismiss="modal">Cancel</button>
+            <button class="btn btn-primary btn-insert"><?= e(trans('graker.photoalbums::lang.plugin.insert')) ?></button>
+            <button class="btn btn-default btn-cancel" data-dismiss="modal"><?= e(trans('backend::lang.form.cancel')) ?></button>
         </div>
     </div>
 </div>

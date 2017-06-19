@@ -50,6 +50,9 @@ return [
     'front_label' => 'Front',
     'code_label' => 'Code',
     'code_description' => 'Type in default markdown to use for photo insert. There are two placeholders: %id% and %title%, they will be replaced with photo id and photo title automatically.',
+    'selecting_photo' => 'Selecting photo',
+    'insert' => 'Insert',
+    'back_to_albums' => 'Back to albums',
   ],
   'errors' => [
     'album_not_found' => 'Album not found!',
@@ -65,6 +68,7 @@ return [
     'albums_on_page_error' => 'Albums on page value must be a number',
     'photos_count_error' => 'Photos count must be a number',
     'cache_lifetime_error' => 'Cache lifetime must be a number',
+    'no_albums' => 'You don\'t have any albums yet.',
   ],
   'messages' => [
     'set_front' => 'Are you sure to set this photo as front for the album?',

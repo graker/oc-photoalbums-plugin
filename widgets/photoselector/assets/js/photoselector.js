@@ -100,7 +100,7 @@
     PhotoSelector.prototype.onBackToAlbums = function (event) {
         var selector = this;
         $.request('onAlbumListLoad', {
-           'update': { albums: '#photosList'},
+            'update': { albums: '#photosList'},
             success: function (data) {
                 this.success(data);
                 $('#albumsList').find('.album-link').one('click', selector.proxy(selector.onAlbumClicked));
@@ -136,14 +136,6 @@
         var link = $(event.currentTarget);
         link.trigger('click');
         $('div.photo-selection-dialog').find('button.btn-insert').trigger('click');
-    };
-
-
-    /**
-     * Hide and destroy popup
-     */
-    PhotoSelector.prototype.onPopupHidden = function () {
-        this.dispose();
     };
 
 

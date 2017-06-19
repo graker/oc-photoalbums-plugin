@@ -19,7 +19,7 @@ class PhotoSelector extends WidgetBase {
 
     // TODO add spinners for waiting
     // TODO try to remember last position so user won't be selecting the same album over and over again
-    // TODO localize partials
+    // TODO don't forget to update version.yaml
 
     /**
      * @var string unique widget alias
