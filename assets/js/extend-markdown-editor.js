@@ -26,14 +26,15 @@
          */
         editor.showAlbumsDialog = function (template) {
             var editor = this.editor,
-                pos = this.editor.getCursorPosition(),
-                text = editor.session.getTextRange(editor.selection.getRange()).trim();
+                pos = this.editor.getCursorPosition();
 
             new $.oc.photoselector.popup({
                 alias: 'photoSelector',
-                onInsert: function () {
-                    // TODO implement
-                    console.log('Photo is being inserted');
+                onInsert: function (code) {
+                    editor.insert(template.replace('$1', code));
+                    editor.moveCursorToPosition(pos);
+                    editor.focus();
+                    this.hide();
                 }
             });
         };

@@ -46,8 +46,10 @@
      * @param popup
      */
     PhotoSelector.prototype.onPopupShown = function (event, element, popup) {
+        this.$dialog = popup;
         // bind clicks for album thumb and title links
         $('#albumsList .album-link', popup).one('click', this.proxy(this.onAlbumClicked));
+        $('div.photo-selection-dialog').find('button.btn-insert').click(this.proxy(this.onInsertClicked));
     };
 
 
@@ -103,6 +105,40 @@
                 $('#albumsList').find('.album-link').one('click', selector.proxy(selector.onAlbumClicked));
             }
         });
+    };
+
+
+    /**
+     * Photo insert button callback
+     *
+     * @param event
+     */
+    PhotoSelector.prototype.onInsertClicked = function (event) {
+        var selected = $('#photosList').find('a.selected').first();
+        if (!selected.length) {
+            alert('You have to select a photo first. Click on the photo, then click "Insert". Or just double-click the photo.');
+        } else {
+            var code = selected.data('request-data');
+            this.options.onInsert.call(this, code);
+        }
+    };
+
+
+    /**
+     * Hide and destroy popup
+     */
+    PhotoSelector.prototype.onPopupHidden = function () {
+        this.dispose();
+    };
+
+
+    /**
+     * Hide popup
+     */
+    PhotoSelector.prototype.hide = function () {
+        if (this.$dialog) {
+            this.$dialog.trigger('close.oc.popup');
+        }
     };
 
 

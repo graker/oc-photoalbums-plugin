@@ -4,12 +4,12 @@
     <div class="col-xs-12 col-sm-4">
         <div class="photo-links-wrapper">
             <p class="text-center">
-                <a href="javascript: ;" class="photo-link image-link" data-request-data="<?= $photo->id ?>">
+                <a href="javascript: ;" class="photo-link image-link" data-request-data="<?= $photo->code ?>">
                     <img src="<?= $photo->thumb; ?>" />
                 </a>
             </p>
             <p class="text-center">
-                <a href="javascript: ;" class="photo-link title-link" data-request-data="<?= $photo->id ?>">
+                <a href="javascript: ;" class="photo-link title-link" data-request-data="<?= $photo->code ?>">
                     <?php if ($photo->title) : ?>
                         <?= $photo->title; ?>
                     <?php else: ?>

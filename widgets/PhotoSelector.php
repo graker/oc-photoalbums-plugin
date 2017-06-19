@@ -16,12 +16,10 @@ use Illuminate\Support\Collection;
  */
 class PhotoSelector extends WidgetBase {
 
-    // TODO add footer buttons
     // TODO add spinners for waiting
-    // TODO implement insert
     // TODO try to remember last position so user won't be selecting the same album over and over again
-    // TODO we probably could add markdown to each photo right here
     // TODO create plugin settings to store default markdown to be inserted
+    // TODO localize partials
 
     /**
      * @var string unique widget alias
@@ -148,15 +146,31 @@ class PhotoSelector extends WidgetBase {
         if ($album) {
             //prepare photo urls and thumbs
             foreach ($album->photos as $photo) {
+                // set thumb
                 $photo->thumb = $photo->image->getThumb(
                   160,
                   120,
                   ['mode' => 'crop']
                 );
+                // set code
+                $photo->code = $this->createPhotoCode($photo);
             }
         }
 
         return $album;
+    }
+
+
+    /**
+     *
+     * Create an insert code for photo
+     *
+     * @param Photo $photo
+     * @return string
+     */
+    protected function createPhotoCode($photo) {
+        // TODO take code from settings
+        return '![1]([photo:' . $photo->id . '])';
     }
 
 }
