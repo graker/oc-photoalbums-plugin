@@ -91,10 +91,6 @@ So if you add placeholder in href for anchor tag or in src for img tag (or into 
 
 ## Roadmap
 
-### Photo insert selection dialog
-
-To make photo insert more comfortable, it would be nice to have editor button showing dialog for album/photo selection generating placeholders automatically (just like Media insert button).
-
 ### Attachments location
 
 Right now plugin uses System\Models\File to attach images so they are stored in system uploads, each one in separate directory with random names. 
