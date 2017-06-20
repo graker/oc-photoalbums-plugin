@@ -9,6 +9,9 @@
     $(document).ready(function () {
         var editor = $('[data-control="markdowneditor"]').data('oc.markdownEditor');
 
+        // to preserve last selected album so user won't open it again and again
+        var currentAlbum = 0;
+
         // FIXME Localize label when it is supported
         var button = {
             label: 'Insert photo from Photoalbums',
@@ -30,11 +33,14 @@
 
             new $.oc.photoselector.popup({
                 alias: 'photoSelector',
-                onInsert: function (code) {
+                album: currentAlbum,
+                onInsert: function (code, album) {
                     editor.insert(template.replace('$1', code));
                     editor.moveCursorToPosition(pos);
                     editor.focus();
                     this.hide();
+                    // save current album
+                    currentAlbum = album;
                 }
             });
         };

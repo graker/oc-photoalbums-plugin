@@ -17,7 +17,6 @@ use Illuminate\Support\Collection;
  */
 class PhotoSelector extends WidgetBase {
 
-    // TODO try to remember last position so user won't be selecting the same album over and over again
     // TODO don't forget to update version.yaml
 
     /**
@@ -33,7 +32,17 @@ class PhotoSelector extends WidgetBase {
      * @return string
      */
     public function render() {
-        $this->vars['albums'] = $this->albums();
+        // if we have current album id, open the album, otherwise open albums list
+        $album_id = input('album');
+
+        if ($album_id) {
+            $this->vars['albums'] = NULL;
+            $this->vars['album'] = $this->album($album_id);
+        } else {
+            $this->vars['albums'] = $this->albums();
+            $this->vars['album'] = NULL;
+        }
+
 
         return $this->makePartial('body');
     }
@@ -84,8 +93,7 @@ class PhotoSelector extends WidgetBase {
     public function onAlbumLoad() {
         $album_id = input('id');
         $album = $this->album($album_id);
-        $this->vars['album_title'] = $album->title;
-        $this->vars['photos'] = $album->photos;
+        $this->vars['album'] = $album;
 
         return [
           '#albumsList' => $this->makePartial('photos'),
@@ -136,7 +144,7 @@ class PhotoSelector extends WidgetBase {
           ->with(['photos' => function ($query) {
               $query->orderBy('sort_order', 'desc');
               $query->with('image');
-              // TODO add pagination settings
+              // TODO implement pagination
           }])
           ->first();
 

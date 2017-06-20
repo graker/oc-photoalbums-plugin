@@ -7,6 +7,8 @@
         <div class="modal-body">
             <?php if ($albums) : ?>
                 <?= $this->makePartial('albums') ?>
+            <?php elseif ($album) : ?>
+                <?= $this->makePartial('photos') ?>
             <?php else : ?>
                 <p><?= e(trans('graker.photoalbums::lang.errors.no_albums')) ?></p>
             <?php endif; ?>

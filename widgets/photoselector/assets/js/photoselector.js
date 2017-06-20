@@ -33,6 +33,7 @@
         this.$dialog.one('complete.oc.popup', this.proxy(this.onPopupShown));
         this.$dialog.popup({
             size: 'large',
+            extraData: {album: this.options.album },
             handler: this.options.alias + '::onDialogOpen'
         });
     };
@@ -48,7 +49,11 @@
     PhotoSelector.prototype.onPopupShown = function (event, element, popup) {
         this.$dialog = popup;
         // bind clicks for album thumb and title links
-        $('#albumsList .album-link', popup).one('click', this.proxy(this.onAlbumClicked));
+        if (this.options.album) {
+            this.bindPhotosListHandlers();
+        } else {
+            $('#albumsList .album-link', popup).one('click', this.proxy(this.onAlbumClicked));
+        }
         $('div.photo-selection-dialog').find('button.btn-insert').click(this.proxy(this.onInsertClicked));
     };
 
@@ -66,13 +71,21 @@
             loading: $.oc.stripeLoadIndicator,
             success: function (data) {
                 this.success(data);
-                // bind photo link click and double click events
-                $('#photosList').find('a.photo-link').click(selector.proxy(selector.onPhotoSelected));
-                $('#photosList').find('a.photo-link').dblclick(selector.proxy(selector.onPhotoDoubleClicked));
-                // bind back to albums click event
-                $('#photosList').find('a.back-to-albums').one('click', selector.proxy(selector.onBackToAlbums));
+                selector.bindPhotosListHandlers();
             }
         });
+    };
+
+
+    /**
+     * Bind event handlers for photos list
+     */
+    PhotoSelector.prototype.bindPhotosListHandlers = function () {
+        // bind photo link click and double click events
+        $('#photosList').find('a.photo-link').click(this.proxy(this.onPhotoSelected));
+        $('#photosList').find('a.photo-link').dblclick(this.proxy(this.onPhotoDoubleClicked));
+        // bind back to albums click event
+        $('#photosList').find('a.back-to-albums').one('click', this.proxy(this.onBackToAlbums));
     };
 
 
@@ -122,7 +135,8 @@
             alert('You have to select a photo first. Click on the photo, then click "Insert". Or just double-click the photo.');
         } else {
             var code = selected.data('request-data');
-            this.options.onInsert.call(this, code);
+            var album = $('#photosList').data('request-data');
+            this.options.onInsert.call(this, code, album);
         }
     };
 
@@ -156,6 +170,7 @@
      */
     PhotoSelector.DEFAULTS = {
         alias: undefined,
+        album: 0,
         onInsert: undefined
     };
 
