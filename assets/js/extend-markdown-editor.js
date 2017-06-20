@@ -41,6 +41,8 @@
                     this.hide();
                     // save current album
                     currentAlbum = album;
+                    console.log(currentAlbum);
+                    console.log(album);
                 }
             });
         };

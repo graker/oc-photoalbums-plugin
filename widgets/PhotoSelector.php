@@ -78,7 +78,7 @@ class PhotoSelector extends WidgetBase {
         $this->vars['albums'] = $this->albums();
 
         return [
-          '#photosList' => $this->makePartial('albums'),
+          '#listContainer' => $this->makePartial('albums'),
         ];
     }
 
@@ -86,7 +86,7 @@ class PhotoSelector extends WidgetBase {
     /**
      *
      * Callback to generate photos list
-     * Photos list is to replace albumsList in dialog markup
+     * Photos list is to replace albums list in dialog markup
      *
      * @return array
      */
@@ -96,7 +96,7 @@ class PhotoSelector extends WidgetBase {
         $this->vars['album'] = $album;
 
         return [
-          '#albumsList' => $this->makePartial('photos'),
+          '#listContainer' => $this->makePartial('photos'),
         ];
     }
 

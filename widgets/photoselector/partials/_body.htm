@@ -4,7 +4,7 @@
             <button type="button" class="close" data-dismiss="modal">&times;</button>
             <h4><?= e(trans('graker.photoalbums::lang.plugin.selecting_photo')) ?></h4>
         </div>
-        <div class="modal-body">
+        <div id="listContainer" class="modal-body">
             <?php if ($albums) : ?>
                 <?= $this->makePartial('albums') ?>
             <?php elseif ($album) : ?>

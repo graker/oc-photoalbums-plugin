@@ -67,7 +67,7 @@
         var selector = this;
         $.request('onAlbumLoad', {
             data: {id: link_id},
-            update: {photos: '#albumsList'},
+            update: {photos: '#listContainer'},
             loading: $.oc.stripeLoadIndicator,
             success: function (data) {
                 this.success(data);
@@ -114,7 +114,7 @@
     PhotoSelector.prototype.onBackToAlbums = function (event) {
         var selector = this;
         $.request('onAlbumListLoad', {
-            'update': { albums: '#photosList'},
+            'update': { albums: '#listContainer'},
             loading: $.oc.stripeLoadIndicator,
             success: function (data) {
                 this.success(data);
