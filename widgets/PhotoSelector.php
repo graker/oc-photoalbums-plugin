@@ -17,8 +17,6 @@ use Illuminate\Support\Collection;
  */
 class PhotoSelector extends WidgetBase {
 
-    // TODO don't forget to update version.yaml
-
     /**
      * @var string unique widget alias
      */
