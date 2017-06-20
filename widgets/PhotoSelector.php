@@ -17,7 +17,6 @@ use Illuminate\Support\Collection;
  */
 class PhotoSelector extends WidgetBase {
 
-    // TODO add spinners for waiting
     // TODO try to remember last position so user won't be selecting the same album over and over again
     // TODO don't forget to update version.yaml
 
@@ -137,7 +136,7 @@ class PhotoSelector extends WidgetBase {
           ->with(['photos' => function ($query) {
               $query->orderBy('sort_order', 'desc');
               $query->with('image');
-              // TODO add pagination (with respect to settings)
+              // TODO add pagination settings
           }])
           ->first();
 

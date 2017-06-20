@@ -63,6 +63,7 @@
         $.request('onAlbumLoad', {
             data: {id: link_id},
             update: {photos: '#albumsList'},
+            loading: $.oc.stripeLoadIndicator,
             success: function (data) {
                 this.success(data);
                 // bind photo link click and double click events
@@ -101,6 +102,7 @@
         var selector = this;
         $.request('onAlbumListLoad', {
             'update': { albums: '#photosList'},
+            loading: $.oc.stripeLoadIndicator,
             success: function (data) {
                 this.success(data);
                 $('#albumsList').find('.album-link').one('click', selector.proxy(selector.onAlbumClicked));
