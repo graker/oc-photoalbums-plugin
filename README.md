@@ -52,9 +52,26 @@ Uploading multiple photos is supported with the [Dropzone.js](http://www.dropzon
 
 ## Insert photos from galleries
 
-You can insert photos from galleries created by this plugin into [Blog](https://octobercms.com/plugin/rainlab-blog) posts or any other Markdown-processed text.
-To do that, insert `[photo:id:width:height:mode]` into the text. Here:
+### Dialog to insert photos into Blog posts
 
+You can insert photos from galleries created by this plugin into [Blog](https://octobercms.com/plugin/rainlab-blog) posts. 
+Just click on a camera icon near media manager in the post markdown editor, then select album and photo.  Markdown code for selected photo will appear in the editor.
+
+### Markdown syntax
+
+To change the code template, go to Settings -> Photo Albums tab. The syntax is explained below and you can use `%id%` and `%title%` placeholders for photo id and title. 
+You can use placeholders multiple times. For example, you can type in template like this:
+ 
+```[![%title%]([photo:%id%:640:480:crop]){.img-responsive}]([photo:%id%]  &quot;%title%&quot;){.magnific}```
+
+It will result in image 640x480 cropped thumb with title having `img-responsive` class, linked to full-size image with title and `magnific` class. 
+Note that you can't use quote symbol in the template, you have to replace quotes with `&quot;`.
+
+The syntax for [photo] part is as follows:
+
+```[photo:id:width:height:mode]```
+
+Here:
 * `id` is a photo model id (you can get it from url).
 * `width` and `height` are optional, if they are provided, photo will be inserted as a thumbnail with these width and height.
 * `mode` is an optional mode for thumbnail generation, possible values are: `auto`, `exact`, `portrait`, `landscape`, `crop` (see October thumbs generation for more info). Defaults to `auto`.
@@ -66,6 +83,8 @@ For example:
 * `[photo:123]` for image as is, no thumb
 
 The placeholder will be replaced with path to image (or thumb), for example: `/storage/app/uploads/public/57a/24e/bff/thumb_301_640x480_0_0_auto.jpg`.
+
+You can use this code to insert photos in any markdown-processed text.
 
 Note that to avoid possible conflicts, placeholders are only replaced inside `src=""` and `href=""` clauses. 
 So if you add placeholder in href for anchor tag or in src for img tag (or into Markdown link or image), it will be replaced. And if you add it into plain text, it will be ignored.

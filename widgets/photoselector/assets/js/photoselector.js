@@ -132,6 +132,7 @@
     PhotoSelector.prototype.onInsertClicked = function (event) {
         var selected = $('#photosList').find('a.selected').first();
         if (!selected.length) {
+            // FIXME Localize when it is supported
             alert('You have to select a photo first. Click on the photo, then click "Insert". Or just double-click the photo.');
         } else {
             var code = selected.data('request-data');
