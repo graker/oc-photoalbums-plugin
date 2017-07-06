@@ -246,7 +246,7 @@ class Plugin extends PluginBase
         // resolve item
         Event::listen('pages.menuitem.resolveItem', function($type, $item, $url, $theme) {
             if (in_array($type, array_keys(MenuItemsProvider::listTypes()))) {
-                return MenuItemsProvider::resolveMenuItem($item, $url, $theme);
+                return MenuItemsProvider::resolveMenuItem($type, $item, $url, $theme);
             }
         });
     }

@@ -205,13 +205,13 @@ class MenuItemsProvider {
 
         $albums = Album::all();
         foreach ($albums as $album) {
-            $item = [
+            $albumItem = [
                 'title' => $album->title,
                 'url' => self::getAlbumUrl($album, $item->cmsPage, $theme),
                 'mtime' => $album->updated_at,
             ];
-            $item['isActive'] = ($item['url'] == $url);
-            $result['items'][] = $item;
+            $albumItem['isActive'] = ($albumItem['url'] == $url);
+            $result['items'][] = $albumItem;
         }
 
         return $result;
@@ -269,13 +269,13 @@ class MenuItemsProvider {
 
         $photos = Photo::all();
         foreach ($photos as $photo) {
-            $item = [
+            $photoItem = [
               'title' => $photo->title,
               'url' => self::getPhotoUrl($photo, $item->cmsPage, $theme),
               'mtime' => $photo->updated_at,
             ];
-            $item['isActive'] = ($item['url'] == $url);
-            $result['items'][] = $item;
+            $photoItem['isActive'] = ($photoItem['url'] == $url);
+            $result['items'][] = $photoItem;
         }
 
         return $result;
@@ -340,6 +340,7 @@ class MenuItemsProvider {
         $paramName = substr(trim($matches[1]), 1);
         $params = [
           $paramName => $photo->id,
+          'album_slug' => $photo->album->slug,
         ];
         $url = CmsPage::url($page->getBaseFileName(), $params);
 
