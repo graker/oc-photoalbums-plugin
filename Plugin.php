@@ -6,6 +6,7 @@ use Event;
 use Backend\Widgets\Form;
 use Lang;
 use Graker\PhotoAlbums\Widgets\PhotoSelector;
+use Graker\PhotoAlbums\Classes\MenuItemsProvider;
 
 /**
  * PhotoAlbums Plugin Information File
@@ -197,6 +198,7 @@ class Plugin extends PluginBase
     public function boot() {
         Event::listen('markdown.parse', 'Graker\PhotoAlbums\Classes\MarkdownPhotoInsert@parse');
         $this->extendBlogPostForm();
+        $this->registerMenuItems();
     }
 
 
@@ -221,6 +223,31 @@ class Plugin extends PluginBase
 
             // add javascript extending Markdown editor with new button
             $widget->addJs('/plugins/graker/photoalbums/assets/js/extend-markdown-editor.js');
+        });
+    }
+
+
+    /**
+     * Listen to events from RainLab.Pages plugin to register and resolve new menu items
+     */
+    protected function registerMenuItems() {
+        // register items
+        Event::listen('pages.menuitem.listTypes', function() {
+            return MenuItemsProvider::listTypes();
+        });
+
+        // return item type info
+        Event::listen('pages.menuitem.getTypeInfo', function($type) {
+            if (in_array($type, array_keys(MenuItemsProvider::listTypes()))) {
+                return MenuItemsProvider::getMenuTypeInfo($type);
+            }
+        });
+
+        // resolve item
+        Event::listen('pages.menuitem.resolveItem', function($type, $item, $url, $theme) {
+            if (in_array($type, array_keys(MenuItemsProvider::listTypes()))) {
+                return MenuItemsProvider::resolveMenuItem($type, $item, $url, $theme);
+            }
         });
     }
 

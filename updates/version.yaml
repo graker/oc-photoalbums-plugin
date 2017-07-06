@@ -22,3 +22,5 @@
     - Fix for photos count in only_full_group_by sql mode
 1.3.0:
     - New dialog to insert photos into blog posts
+1.4.0:
+    - Integration with RainLab.Pages to use Albums and Photos in Menu Items (and Sitemap)
