@@ -28,3 +28,5 @@
     - Improved layout of Photo form (thanks to gergo85)
     - Improved lang.php strings (thanks to gergo85)
     - Localized Menu Item types
+1.4.2:
+    - Fixed second insert photo icon from occuring in blog post form
