@@ -24,3 +24,7 @@
     - New dialog to insert photos into blog posts
 1.4.0:
     - Integration with RainLab.Pages to use Albums and Photos in Menu Items (and Sitemap)
+1.4.1:
+    - Improved layout of Photo form (thanks to gergo85)
+    - Improved lang.php strings (thanks to gergo85)
+    - Localized Menu Item types
