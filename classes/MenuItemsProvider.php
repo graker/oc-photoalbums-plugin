@@ -23,10 +23,9 @@ class MenuItemsProvider {
      */
     public static function listTypes() {
         return [
-          // TODO localize
-          'all-photo-albums' => 'All Photo Albums',
-          'all-photos' => 'All Photos',
-          'photo-album' => 'Photo Album',
+          'all-photo-albums' => 'graker.photoalbums::lang.plugin.all_photo_albums',
+          'all-photos' => 'graker.photoalbums::lang.plugin.all_photos',
+          'photo-album' => 'graker.photoalbums::lang.plugin.album',
         ];
     }
 

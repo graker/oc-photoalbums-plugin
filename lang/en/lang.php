@@ -55,6 +55,8 @@ return [
     'insert' => 'Insert',
     'not_selected' => 'Not selected',
     'back_to_albums' => 'Back to albums',
+    'all_photo_albums' => 'All Photo Albums',
+    'all_photos' => 'All Photos',
   ],
   'errors' => [
     'album_not_found' => 'Album not found!',
