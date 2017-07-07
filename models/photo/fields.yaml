@@ -22,10 +22,10 @@ fields:
         label: graker.photoalbums::lang.plugin.album
         type: relation
         nameFrom: title
-        emptyOption: Not selected
+        emptyOption: graker.photoalbums::lang.plugin.not_selected
         span: left
 
     description:
-        label: graker.photoalbums::lang.plugin.description
+        label: graker.photoalbums::lang.plugin.photo_description
         type: richeditor
         size: large
