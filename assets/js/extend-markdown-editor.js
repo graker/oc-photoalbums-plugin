@@ -6,7 +6,7 @@
 
 +function ($) {
 
-    $(document).ready(function () {
+    $(document).one('ready', function () {
         var editor = $('[data-control="markdowneditor"]').data('oc.markdownEditor');
 
         // to preserve last selected album so user won't open it again and again
