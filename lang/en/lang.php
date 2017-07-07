@@ -29,6 +29,7 @@ return [
     'deleting_photo' => 'Deleting photo...',
     'photo' => 'Photo',
     'photos' => 'Photos',
+    'photo_description' => 'Description',
     'set_front_button' => 'Set as front',
     'reorder_button' => 'Reorder photos',
     'bool_positive' => 'Yes',
@@ -52,6 +53,7 @@ return [
     'code_description' => 'Type in default markdown to use for photo insert. There are two placeholders: %id% and %title%, they will be replaced with photo id and photo title automatically.',
     'selecting_photo' => 'Selecting photo',
     'insert' => 'Insert',
+    'not_selected' => 'Not selected',
     'back_to_albums' => 'Back to albums',
   ],
   'errors' => [
