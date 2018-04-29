@@ -10,7 +10,7 @@ return [
     'name' => 'Photo Albums',
     'description' => 'Crear, mostrar y gestionar galerías de fotos ordenadas en álbumes.',
     'settings_description' => 'Ajustes del plugin Photo Albums',
-    'tab' => 'Photo Albums',
+    'tab' => 'Álbumes de fotos',
     'manage_albums' => 'Gestionar álbumes de fotos',
     'access_permission' => 'Ajustes de permisos de acceso',
     'upload_photos' => 'Subir fotos',
